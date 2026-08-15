@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowLeft, SlidersHorizontal, UtensilsCrossed, X } from "lucide-react";
@@ -8,6 +8,10 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { DishCard, DishCardSkeleton } from "@/components/carta/DishCard";
 import { CartFab } from "@/components/carta/CartDrawer";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { OfflineMenu } from "@/components/carta/OfflineMenu";
+import { OfflineNotice } from "@/components/carta/OfflineNotice";
+import { saveMenuCache } from "@/lib/menu-cache";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 
 const menuQuery = queryOptions({
   queryKey: ["public-menu"],
@@ -38,11 +42,7 @@ export const Route = createFileRoute("/carta")({
   }),
   component: CartaPage,
   pendingComponent: MenuSkeleton,
-  errorComponent: ({ error }) => (
-    <div role="alert" className="p-8 text-center">
-      No se pudo cargar la carta: {error.message}
-    </div>
-  ),
+  errorComponent: ({ error }) => <OfflineMenu message={error.message} />,
   notFoundComponent: () => <div className="p-8">Carta no disponible.</div>,
 });
 
@@ -64,6 +64,12 @@ function CartaPage() {
   const [active, setActive] = useState<string[]>([]);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const online = useOnlineStatus();
+
+  // Guarda la carta para que siga visible si se pierde la conexión.
+  useEffect(() => {
+    saveMenuCache({ settings: data.settings, categories: data.categories });
+  }, [data]);
 
   const categories = useMemo(
     () =>
@@ -85,12 +91,16 @@ function CartaPage() {
 
   function scrollTo(id: string) {
     setActiveCategory(id);
-    document.getElementById(`cat-${id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById(`cat-${id}`)?.scrollIntoView({
+      behavior: reduced ? "auto" : "smooth",
+      block: "start",
+    });
   }
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
+      <header className="safe-pt safe-px sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
           <div className="flex items-center gap-3">
             {s?.logo_url ? (
@@ -122,7 +132,7 @@ function CartaPage() {
           </div>
         </div>
 
-        <div className="border-t border-border/60">
+        <div className="safe-px border-t border-border/60">
           <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-2">
             <div className="flex flex-1 gap-2 overflow-x-auto pb-1">
               {categories.map((c) => (
@@ -131,7 +141,7 @@ function CartaPage() {
                   type="button"
                   onClick={() => scrollTo(c.id)}
                   disabled={c.dishes.length === 0}
-                  className={`transition-warm whitespace-nowrap rounded-full border px-4 py-1.5 text-small ${
+                  className={`tap-target transition-warm whitespace-nowrap rounded-full border px-4 py-1.5 text-small ${
                     activeCategory === c.id
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-card hover:border-gold"
@@ -144,7 +154,7 @@ function CartaPage() {
             <button
               type="button"
               onClick={() => setFiltersOpen(true)}
-              className="transition-warm inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10"
+              className="tap-target transition-warm inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10"
             >
               <SlidersHorizontal className="size-4" /> Filtrar alérgenos
               {active.length > 0 && (
@@ -158,6 +168,12 @@ function CartaPage() {
       </header>
 
       <main className="mx-auto max-w-6xl px-6 pb-16">
+        {!online && (
+          <div className="pt-4">
+            <OfflineNotice />
+          </div>
+        )}
+
         {active.length > 0 && (
           <div className="flex flex-wrap items-center gap-3 py-4 text-small">
             <span className="text-muted-foreground">
@@ -217,15 +233,15 @@ function CartaPage() {
       </main>
 
       {filtersOpen && (
-        <div className="fixed inset-0 z-40 flex justify-end bg-dark-brown/50 p-0">
-          <div className="h-full w-full max-w-sm overflow-y-auto bg-cream p-6 shadow-warm-lg">
+        <div className="fixed inset-0 z-40 flex h-[100dvh] justify-end bg-dark-brown/50 p-0">
+          <div className="safe-pt safe-pb safe-px h-full w-full max-w-sm overflow-y-auto overscroll-contain bg-cream p-6 shadow-warm-lg">
             <div className="flex items-center justify-between">
               <h2 className="font-display text-h3">Filtrar alérgenos</h2>
               <button
                 type="button"
                 aria-label="Cerrar"
                 onClick={() => setFiltersOpen(false)}
-                className="transition-warm rounded-full border border-border p-2 hover:bg-background"
+                className="tap-target transition-warm inline-flex items-center justify-center rounded-full border border-border hover:bg-background"
               >
                 <X className="size-4" />
               </button>
