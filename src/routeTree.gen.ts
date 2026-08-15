@@ -14,6 +14,7 @@ import { Route as AccesoDenegadoRouteImport } from './routes/acceso-denegado'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ProveedorRouteImport } from './routes/proveedor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProveedorRoute = ProveedorRouteImport.update({
+  id: '/proveedor',
+  path: '/proveedor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/proveedor': typeof ProveedorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/proveedor': typeof ProveedorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,22 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/proveedor': typeof ProveedorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login'
+  fullPaths:
+    '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login' | '/proveedor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login'
-  id: '__root__' | '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login'
+  to: '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login' | '/proveedor'
+  id:
+    | '__root__'
+    | '/'
+    | '/acceso-denegado'
+    | '/admin'
+    | '/equipo'
+    | '/login'
+    | '/proveedor'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +94,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
+  ProveedorRoute: typeof ProveedorRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/proveedor': {
+      id: '/proveedor'
+      path: '/proveedor'
+      fullPath: '/proveedor'
+      preLoaderRoute: typeof ProveedorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +150,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
+  ProveedorRoute: ProveedorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
