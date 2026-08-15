@@ -115,9 +115,6 @@ function Landing() {
                   {c.available_dishes}{" "}
                   {c.available_dishes === 1 ? "plato disponible" : "platos disponibles"}
                 </p>
-                <span className="mt-4 inline-flex rounded-full bg-secondary px-3 py-1 text-small font-medium text-secondary-foreground">
-                  Del día
-                </span>
               </article>
             ))}
           </div>
