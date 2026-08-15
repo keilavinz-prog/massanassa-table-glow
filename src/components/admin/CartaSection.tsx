@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ChevronDown, Pencil, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, Loader2, Pencil, Plus, Sparkles, Trash2 } from "lucide-react";
 import {
   deleteCategory,
   deleteDish,
@@ -13,8 +13,10 @@ import {
   type Category,
   type Dish,
 } from "@/lib/admin.functions";
+import { getAiAssistantStatus, suggestDishDescription } from "@/lib/ai.functions";
 import { ALLERGENS, ALLERGEN_LABELS } from "@/lib/admin-schemas";
 import { ImageField } from "./ImageField";
+
 
 const inputClass =
   "w-full rounded-sm border border-input bg-background px-3 py-2 text-body outline-none focus:border-terracota";
