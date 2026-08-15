@@ -18,7 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PedidoRouteImport } from './routes/pedido'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
-import { Route as PedidoConfirmacionRouteImport } from './routes/pedido.confirmacion'
+import { Route as PedidoConfirmacionRouteImport } from './routes/pedido_.confirmacion'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 
 const IndexRoute = IndexRouteImport.update({
@@ -67,9 +67,9 @@ const ReservarRoute = ReservarRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const PedidoConfirmacionRoute = PedidoConfirmacionRouteImport.update({
-  id: '/confirmacion',
-  path: '/confirmacion',
-  getParentRoute: () => PedidoRoute,
+  id: '/pedido_/confirmacion',
+  path: '/pedido/confirmacion',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
   id: '/api/public/stripe-webhook',
@@ -84,7 +84,7 @@ export interface FileRoutesByFullPath {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRouteWithChildren
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
@@ -97,7 +97,7 @@ export interface FileRoutesByTo {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRouteWithChildren
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
@@ -111,10 +111,10 @@ export interface FileRoutesById {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRouteWithChildren
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
-  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
+  '/pedido_/confirmacion': typeof PedidoConfirmacionRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRouteTypes {
@@ -155,7 +155,7 @@ export interface FileRouteTypes {
     | '/pedido'
     | '/proveedor'
     | '/reservar'
-    | '/pedido/confirmacion'
+    | '/pedido_/confirmacion'
     | '/api/public/stripe-webhook'
   fileRoutesById: FileRoutesById
 }
@@ -166,9 +166,10 @@ export interface RootRouteChildren {
   CartaRoute: typeof CartaRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
-  PedidoRoute: typeof PedidoRouteWithChildren
+  PedidoRoute: typeof PedidoRoute
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
+  PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
 
@@ -237,12 +238,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pedido/confirmacion': {
-      id: '/pedido/confirmacion'
-      path: '/confirmacion'
+    '/pedido_/confirmacion': {
+      id: '/pedido_/confirmacion'
+      path: '/pedido/confirmacion'
       fullPath: '/pedido/confirmacion'
       preLoaderRoute: typeof PedidoConfirmacionRouteImport
-      parentRoute: typeof PedidoRoute
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/stripe-webhook': {
       id: '/api/public/stripe-webhook'
@@ -254,17 +255,6 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface PedidoRouteChildren {
-  PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
-}
-
-const PedidoRouteChildren: PedidoRouteChildren = {
-  PedidoConfirmacionRoute: PedidoConfirmacionRoute,
-}
-
-const PedidoRouteWithChildren =
-  PedidoRoute._addFileChildren(PedidoRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccesoDenegadoRoute: AccesoDenegadoRoute,
@@ -272,9 +262,10 @@ const rootRouteChildren: RootRouteChildren = {
   CartaRoute: CartaRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
-  PedidoRoute: PedidoRouteWithChildren,
+  PedidoRoute: PedidoRoute,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
+  PedidoConfirmacionRoute: PedidoConfirmacionRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport

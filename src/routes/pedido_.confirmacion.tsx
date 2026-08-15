@@ -6,7 +6,7 @@ import { clearCart } from "@/lib/cart";
 
 type OrderSummary = Awaited<ReturnType<typeof getOrderBySessionId>>;
 
-export const Route = createFileRoute("/pedido/confirmacion")({
+export const Route = createFileRoute("/pedido_/confirmacion")({
   validateSearch: (search: Record<string, unknown>) => ({
     session_id: typeof search["session_id"] === "string" ? search["session_id"] : "",
   }),
