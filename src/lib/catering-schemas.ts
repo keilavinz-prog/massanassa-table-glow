@@ -62,10 +62,10 @@ export const cateringRequestSchema = z.object({
     .min(9, "El teléfono debe tener entre 9 y 12 caracteres")
     .max(12, "El teléfono debe tener entre 9 y 12 caracteres"),
   event_date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Fecha no válida")
+    .union([z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Fecha no válida"), z.literal("")])
     .optional()
-    .or(z.literal("").transform(() => undefined)),
+    .transform((v) => (v && v.length > 0 ? v : undefined))
+    .refine((v) => !v || v >= todayISO(), "La fecha no puede ser anterior a hoy"),
   guests: z
     .number({ invalid_type_error: "Indica un número de invitados" })
     .int()
