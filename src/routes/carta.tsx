@@ -6,6 +6,8 @@ import { ALLERGENS, ALLERGEN_LABELS } from "@/lib/admin-schemas";
 import { getPublicMenu } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { DishCard, DishCardSkeleton } from "@/components/carta/DishCard";
+import { CartFab } from "@/components/carta/CartDrawer";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 
 const menuQuery = queryOptions({
   queryKey: ["public-menu"],
@@ -262,6 +264,8 @@ function CartaPage() {
         </div>
       )}
 
+      <CartFab />
+      <WhatsAppFab phone={s?.whatsapp_phone} />
       <SiteFooter settings={s} />
     </div>
   );

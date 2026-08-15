@@ -108,7 +108,24 @@ export const confirmReservation = createServerFn({ method: "POST" })
       .eq("id", data.id);
     if (error) throw error;
 
-    return { ok: true, calendarSynced: eventId !== null };
+    const { data: settings } = await supabase
+      .from("restaurant_settings")
+      .select("address, city")
+      .eq("id", 1)
+      .maybeSingle();
+
+    const { sendReservationConfirmationEmail } = await import("./emails.server");
+    const email = await sendReservationConfirmationEmail({
+      to: reservation.customer_email,
+      customer_name: reservation.customer_name,
+      reservation_date: reservation.reservation_date,
+      reservation_time: reservation.reservation_time,
+      party_size: reservation.party_size,
+      address: settings?.address ?? "",
+      city: settings?.city ?? "",
+    });
+
+    return { ok: true, calendarSynced: eventId !== null, emailSent: email.sent };
   });
 
 async function setStatus(id: string, status: "rejected" | "cancelled") {

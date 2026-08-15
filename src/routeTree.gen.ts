@@ -15,8 +15,11 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CartaRouteImport } from './routes/carta'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PedidoRouteImport } from './routes/pedido'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
+import { Route as PedidoConfirmacionRouteImport } from './routes/pedido_.confirmacion'
+import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -48,6 +51,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PedidoRoute = PedidoRouteImport.update({
+  id: '/pedido',
+  path: '/pedido',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProveedorRoute = ProveedorRouteImport.update({
   id: '/proveedor',
   path: '/proveedor',
@@ -58,6 +66,16 @@ const ReservarRoute = ReservarRouteImport.update({
   path: '/reservar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PedidoConfirmacionRoute = PedidoConfirmacionRouteImport.update({
+  id: '/pedido_/confirmacion',
+  path: '/pedido/confirmacion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicStripeWebhookRoute = ApiPublicStripeWebhookRouteImport.update({
+  id: '/api/public/stripe-webhook',
+  path: '/api/public/stripe-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -66,8 +84,11 @@ export interface FileRoutesByFullPath {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -76,8 +97,11 @@ export interface FileRoutesByTo {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -87,8 +111,11 @@ export interface FileRoutesById {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido_/confirmacion': typeof PedidoConfirmacionRoute
+  '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -99,8 +126,11 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido/confirmacion'
+    | '/api/public/stripe-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -109,8 +139,11 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido/confirmacion'
+    | '/api/public/stripe-webhook'
   id:
     | '__root__'
     | '/'
@@ -119,8 +152,11 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido_/confirmacion'
+    | '/api/public/stripe-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,8 +166,11 @@ export interface RootRouteChildren {
   CartaRoute: typeof CartaRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
+  PedidoRoute: typeof PedidoRoute
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
+  PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
+  ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -178,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pedido': {
+      id: '/pedido'
+      path: '/pedido'
+      fullPath: '/pedido'
+      preLoaderRoute: typeof PedidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/proveedor': {
       id: '/proveedor'
       path: '/proveedor'
@@ -192,6 +238,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pedido_/confirmacion': {
+      id: '/pedido_/confirmacion'
+      path: '/pedido/confirmacion'
+      fullPath: '/pedido/confirmacion'
+      preLoaderRoute: typeof PedidoConfirmacionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/stripe-webhook': {
+      id: '/api/public/stripe-webhook'
+      path: '/api/public/stripe-webhook'
+      fullPath: '/api/public/stripe-webhook'
+      preLoaderRoute: typeof ApiPublicStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -202,8 +262,11 @@ const rootRouteChildren: RootRouteChildren = {
   CartaRoute: CartaRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
+  PedidoRoute: PedidoRoute,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
+  PedidoConfirmacionRoute: PedidoConfirmacionRoute,
+  ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
