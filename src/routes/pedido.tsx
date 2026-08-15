@@ -11,6 +11,7 @@ import { useCart } from "@/lib/cart";
 import { CartLines } from "@/components/carta/CartDrawer";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { ConsentCheckbox } from "@/components/legal/ConsentCheckbox";
 
 const landingQuery = queryOptions({
   queryKey: ["landing-data"],
@@ -50,6 +51,7 @@ function PedidoPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", notes: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   useEffect(() => {
     if (hydrated && items.length === 0 && !submitting) {
@@ -186,9 +188,15 @@ function PedidoPage() {
                 </p>
               </Field>
 
+              <ConsentCheckbox
+                checked={consent}
+                onChange={setConsent}
+                purpose="tramitar tu pedido y enviarte la confirmación"
+              />
+
               <button
                 type="submit"
-                disabled={submitting || items.length === 0}
+                disabled={submitting || items.length === 0 || !consent}
                 className="transition-warm w-full rounded-md bg-primary py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110 disabled:opacity-60"
               >
                 {submitting ? "Redirigiendo al pago…" : `Pagar con tarjeta — ${total.toFixed(2)}€`}
