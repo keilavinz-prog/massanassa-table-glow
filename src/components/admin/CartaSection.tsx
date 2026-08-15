@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ChevronDown, Pencil, Plus, Trash2 } from "lucide-react";
+import { ChevronDown, Loader2, Pencil, Plus, Sparkles, Trash2 } from "lucide-react";
 import {
   deleteCategory,
   deleteDish,
@@ -13,8 +13,10 @@ import {
   type Category,
   type Dish,
 } from "@/lib/admin.functions";
+import { getAiAssistantStatus, suggestDishDescription } from "@/lib/ai.functions";
 import { ALLERGENS, ALLERGEN_LABELS } from "@/lib/admin-schemas";
 import { ImageField } from "./ImageField";
+
 
 const inputClass =
   "w-full rounded-sm border border-input bg-background px-3 py-2 text-body outline-none focus:border-terracota";
@@ -47,17 +49,76 @@ function Modal({
   children: React.ReactNode;
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-dark-brown/50 p-4 py-10">
-      <div className="w-full max-w-lg rounded-md bg-cream p-6 shadow-warm-lg">
+    <div className="safe-px fixed inset-0 z-50 flex h-[100dvh] max-h-[100dvh] items-start justify-center overflow-y-auto overscroll-contain bg-dark-brown/50 p-4 py-10">
+      <div className="mb-[env(safe-area-inset-bottom,0px)] w-full max-w-lg rounded-md bg-cream p-6 shadow-warm-lg">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="font-display text-h3">{title}</h3>
-          <button type="button" onClick={onClose} className="text-small underline">
+          <button
+            type="button"
+            onClick={onClose}
+            className="tap-target transition-warm inline-flex items-center justify-center rounded-sm px-2 text-small underline hover:text-terracota"
+          >
             Cerrar
           </button>
         </div>
+
         {children}
       </div>
     </div>
+  );
+}
+
+/**
+ * Botón opcional de redacción asistida. Siempre visible; deshabilitado con
+ * tooltip cuando el entorno no tiene el asistente configurado.
+ */
+function AiDescriptionButton({
+  configured,
+  name,
+  category,
+  allergens,
+  onSuggestion,
+}: {
+  configured: boolean;
+  name: string;
+  category: string;
+  allergens: string[];
+  onSuggestion: (text: string) => void;
+}) {
+  const suggestFn = useServerFn(suggestDishDescription);
+  const mutation = useMutation({
+    mutationFn: () => suggestFn({ data: { name: name.trim(), category, allergens } }),
+    onSuccess: (result) => {
+      onSuggestion(result.suggestion);
+      toast.success("Sugerencia lista: revísala antes de guardar");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const hasName = name.trim().length >= 2;
+  const disabled = !configured || !hasName || mutation.isPending;
+  const title = !configured
+    ? "IA no configurada en este entorno"
+    : !hasName
+      ? "Escribe primero el nombre del plato"
+      : "Genera una sugerencia de descripción";
+
+  return (
+    <button
+      type="button"
+      onClick={() => mutation.mutate()}
+      disabled={disabled}
+      title={title}
+      aria-label={title}
+      className={`${ghostBtn} tap-target disabled:cursor-not-allowed`}
+    >
+      {mutation.isPending ? (
+        <Loader2 className="size-4 animate-spin" />
+      ) : (
+        <Sparkles className="size-4 text-gold" />
+      )}
+      {mutation.isPending ? "Redactando…" : "Sugerir descripción con IA"}
+    </button>
   );
 }
 
@@ -65,6 +126,15 @@ export function CartaSection() {
   const queryClient = useQueryClient();
   const fetchMenu = useServerFn(getAdminMenu);
   const { data, isLoading } = useQuery({ queryKey: ["admin-menu"], queryFn: () => fetchMenu() });
+
+  const aiStatusFn = useServerFn(getAiAssistantStatus);
+  const { data: aiStatus } = useQuery({
+    queryKey: ["ai-assistant-status"],
+    queryFn: () => aiStatusFn(),
+    staleTime: 10 * 60 * 1000,
+  });
+  const aiConfigured = aiStatus?.configured ?? false;
+
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [categoryDraft, setCategoryDraft] = useState<CategoryDraft | null>(null);
@@ -429,16 +499,34 @@ export function CartaSection() {
                 onChange={(e) => setDishDraft({ ...dishDraft, name: e.target.value })}
               />
             </label>
-            <label className="block space-y-1">
-              <span className="text-small font-medium">Descripción</span>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-small font-medium" id="dish-description-label">
+                  Descripción
+                </span>
+                <AiDescriptionButton
+                  configured={aiConfigured}
+                  name={dishDraft.name}
+                  category={categories.find((c) => c.id === dishDraft.category_id)?.name ?? ""}
+                  allergens={dishDraft.allergens}
+                  onSuggestion={(text) =>
+                    setDishDraft((prev) => (prev ? { ...prev, description: text } : prev))
+                  }
+                />
+              </div>
               <textarea
+                aria-labelledby="dish-description-label"
                 className={inputClass}
                 rows={3}
                 placeholder="Describe el plato brevemente"
                 value={dishDraft.description}
                 onChange={(e) => setDishDraft({ ...dishDraft, description: e.target.value })}
               />
-            </label>
+              <p className="text-small text-muted-foreground">
+                Revisa y edita la sugerencia antes de guardar: nunca se guarda sola.
+              </p>
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block space-y-1">
                 <span className="text-small font-medium">Precio</span>

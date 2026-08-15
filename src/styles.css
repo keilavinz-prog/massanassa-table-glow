@@ -140,3 +140,92 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+
+/* ---------------------------------------------------------------------------
+ * Fase 9 — Pulido: motion, safe areas y áreas táctiles
+ * Solo tokens de Fase 1 (duraciones 200-300ms, --ease-warm, espaciado 24px).
+ * ------------------------------------------------------------------------- */
+
+/* Micro-interacción de éxito: fade + slide 16px */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise-in {
+  animation: rise-in 280ms var(--ease-warm) both;
+}
+
+/* Área táctil mínima recomendada (44x44) para acciones críticas */
+@utility tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe areas (notch / home indicator) */
+@utility safe-pt {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility safe-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@utility safe-px {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+@utility fab-bottom {
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+}
+
+@utility fab-left {
+  left: calc(24px + env(safe-area-inset-left, 0px));
+}
+
+@utility fab-right {
+  right: calc(24px + env(safe-area-inset-right, 0px));
+}
+
+/* Respeto absoluto a prefers-reduced-motion en TODAS las rutas:
+ * sin transform/scale, solo cambios de opacidad casi instantáneos. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 50ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 50ms !important;
+    transition-property: opacity, background-color, color, border-color !important;
+    scroll-behavior: auto !important;
+  }
+
+  .transition-warm {
+    transition-property: opacity, background-color, color, border-color !important;
+    transition-duration: 50ms !important;
+  }
+
+  .animate-rise-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  [class*="scale-"],
+  [class*="translate-"] {
+    transform: none !important;
+  }
+}
+

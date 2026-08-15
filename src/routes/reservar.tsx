@@ -385,7 +385,7 @@ function ConfirmationPanel({
   onReset: () => void;
 }) {
   return (
-    <div className="mt-8 rounded-md border border-olive/40 bg-card p-8 text-center shadow-warm">
+    <div className="animate-rise-in mt-8 rounded-md border border-olive/40 bg-card p-8 text-center shadow-warm">
       <CheckCircle2 className="mx-auto size-14 text-olive" />
       <h2 className="mt-4 font-display text-h2">¡Solicitud recibida!</h2>
       <p className="mt-2 text-muted-foreground">

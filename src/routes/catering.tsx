@@ -124,7 +124,7 @@ function CateringPage() {
 
       <main className="mx-auto max-w-2xl px-6 py-12">
         {done ? (
-          <section className="rounded-lg border border-gold/60 bg-card p-10 text-center shadow-warm">
+          <section className="animate-rise-in rounded-lg border border-gold/60 bg-card p-10 text-center shadow-warm">
             <CheckCircle2 className="mx-auto size-14 text-olive" />
             <h1 className="mt-4 font-display text-h2">¡Gracias!</h1>
             <p className="mt-3 text-muted-foreground">

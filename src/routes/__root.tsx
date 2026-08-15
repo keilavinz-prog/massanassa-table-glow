@@ -125,6 +125,14 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Service worker de solo lectura: mantiene /carta visible sin conexión.
+  useEffect(() => {
+    if (!("serviceWorker" in navigator)) return;
+    navigator.serviceWorker.register("/sw.js").catch(() => {
+      /* offline es una mejora opcional */
+    });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -134,4 +142,5 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
 

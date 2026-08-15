@@ -81,7 +81,7 @@ function ConfirmacionPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-6 py-16 text-foreground">
-      <div className="w-full max-w-lg rounded-lg bg-card p-8 shadow-warm">
+      <div className="animate-rise-in w-full max-w-lg rounded-lg bg-card p-8 shadow-warm">
         {paid ? (
           <CheckCircle2 className="size-12 text-olive" />
         ) : (
