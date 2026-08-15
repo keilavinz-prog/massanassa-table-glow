@@ -66,7 +66,6 @@ export function DishCard({
             ))}
           </ul>
         )}
-      </div>
         <div className="flex items-center gap-2 pt-2">
           <div className="flex items-center gap-1 rounded-md border border-border px-1">
             <button
