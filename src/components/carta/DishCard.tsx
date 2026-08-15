@@ -1,4 +1,8 @@
+import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
+import { toast } from "sonner";
 import { ALLERGEN_LABELS } from "@/lib/admin-schemas";
+import { addToCart } from "@/lib/cart";
 import type { PublicDish } from "@/lib/restaurant.functions";
 
 export function DishCard({
@@ -10,6 +14,14 @@ export function DishCard({
   eager?: boolean;
   showMenuBadge?: boolean;
 }) {
+  const [quantity, setQuantity] = useState(1);
+
+  function handleAdd() {
+    addToCart({ dish_id: dish.id, name: dish.name, price: dish.price }, quantity);
+    toast.success(`${dish.name} añadido al pedido`);
+    setQuantity(1);
+  }
+
   return (
     <article className="group overflow-hidden rounded-md bg-background shadow-warm">
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
@@ -54,6 +66,35 @@ export function DishCard({
             ))}
           </ul>
         )}
+      </div>
+        <div className="flex items-center gap-2 pt-2">
+          <div className="flex items-center gap-1 rounded-md border border-border px-1">
+            <button
+              type="button"
+              aria-label={`Quitar una unidad de ${dish.name}`}
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              className="transition-warm rounded-sm p-1.5 hover:text-primary"
+            >
+              <Minus className="size-3.5" />
+            </button>
+            <span className="min-w-5 text-center text-small font-medium">{quantity}</span>
+            <button
+              type="button"
+              aria-label={`Añadir una unidad de ${dish.name}`}
+              onClick={() => setQuantity((q) => Math.min(99, q + 1))}
+              className="transition-warm rounded-sm p-1.5 hover:text-primary"
+            >
+              <Plus className="size-3.5" />
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={handleAdd}
+            className="transition-warm flex-1 rounded-md bg-primary px-3 py-2 text-small font-medium text-primary-foreground hover:brightness-110"
+          >
+            Añadir al pedido
+          </button>
+        </div>
       </div>
     </article>
   );
