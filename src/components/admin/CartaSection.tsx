@@ -47,8 +47,9 @@ function Modal({
   children: React.ReactNode;
 }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-dark-brown/50 p-4 py-10">
-      <div className="w-full max-w-lg rounded-md bg-cream p-6 shadow-warm-lg">
+    <div className="safe-px fixed inset-0 z-50 flex h-[100dvh] max-h-[100dvh] items-start justify-center overflow-y-auto overscroll-contain bg-dark-brown/50 p-4 py-10">
+      <div className="mb-[env(safe-area-inset-bottom,0px)] w-full max-w-lg rounded-md bg-cream p-6 shadow-warm-lg">
+
         <div className="mb-4 flex items-center justify-between">
           <h3 className="font-display text-h3">{title}</h3>
           <button type="button" onClick={onClose} className="text-small underline">
