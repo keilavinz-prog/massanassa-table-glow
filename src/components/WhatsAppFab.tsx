@@ -11,7 +11,7 @@ export function WhatsAppFab({ phone }: { phone?: string | null | undefined }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp"
-      className="transition-warm fixed bottom-6 left-6 z-40 flex size-14 items-center justify-center rounded-full shadow-warm hover:brightness-110"
+      className="transition-warm fab-bottom fab-left tap-target fixed z-40 flex size-14 items-center justify-center rounded-full shadow-warm hover:brightness-110"
       style={{ backgroundColor: "#25D366" }}
     >
       <svg viewBox="0 0 24 24" aria-hidden="true" className="size-7 fill-white">

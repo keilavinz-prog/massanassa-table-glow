@@ -25,7 +25,7 @@ export function CartLines({ items }: { items: CartItem[] }) {
               type="button"
               aria-label={`Eliminar ${item.name}`}
               onClick={() => removeFromCart(item.dish_id)}
-              className="transition-warm rounded-sm p-1.5 text-muted-foreground hover:text-primary"
+              className="tap-target transition-warm inline-flex items-center justify-center rounded-sm text-muted-foreground hover:text-primary"
             >
               <Trash2 className="size-4" />
             </button>
@@ -36,7 +36,7 @@ export function CartLines({ items }: { items: CartItem[] }) {
                 type="button"
                 aria-label="Quitar una unidad"
                 onClick={() => setQuantity(item.dish_id, item.quantity - 1)}
-                className="transition-warm rounded-sm border border-border p-1.5 hover:border-primary"
+                className="tap-target transition-warm inline-flex items-center justify-center rounded-sm border border-border hover:border-primary"
               >
                 <Minus className="size-3.5" />
               </button>
@@ -45,7 +45,7 @@ export function CartLines({ items }: { items: CartItem[] }) {
                 type="button"
                 aria-label="Añadir una unidad"
                 onClick={() => setQuantity(item.dish_id, Math.min(99, item.quantity + 1))}
-                className="transition-warm rounded-sm border border-border p-1.5 hover:border-primary"
+                className="tap-target transition-warm inline-flex items-center justify-center rounded-sm border border-border hover:border-primary"
               >
                 <Plus className="size-3.5" />
               </button>
@@ -71,7 +71,7 @@ export function CartFab() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="transition-warm fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
+        className="transition-warm fab-bottom fab-right tap-target fixed z-40 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
       >
         <ShoppingBag className="size-5" /> Carrito
         <span className="rounded-full bg-cream px-2 py-0.5 text-small font-semibold text-primary">
@@ -80,7 +80,7 @@ export function CartFab() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex justify-end bg-dark-brown/50">
+        <div className="fixed inset-0 z-50 flex h-[100dvh] justify-end bg-dark-brown/50">
           <aside className="flex h-full w-full max-w-sm flex-col bg-cream shadow-warm-lg">
             <div className="flex items-center justify-between border-b border-border/60 p-6">
               <h2 className="font-display text-h3">Tu pedido</h2>
@@ -88,7 +88,7 @@ export function CartFab() {
                 type="button"
                 aria-label="Cerrar carrito"
                 onClick={() => setOpen(false)}
-                className="transition-warm rounded-full border border-border p-2 hover:bg-background"
+                className="tap-target transition-warm inline-flex items-center justify-center rounded-full border border-border hover:bg-background"
               >
                 <X className="size-4" />
               </button>
