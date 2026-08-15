@@ -65,6 +65,19 @@ export function SiteFooter({ settings: s }: { settings: FooterSettings }) {
           </Link>
         </div>
       </div>
+      <div className="border-t border-cream/15">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-6 py-5 text-small text-cream/60">
+          <Link to="/aviso-legal" className="transition-warm hover:text-gold">
+            Aviso legal
+          </Link>
+          <Link to="/privacidad" className="transition-warm hover:text-gold">
+            Política de privacidad
+          </Link>
+          <Link to="/cookies" className="transition-warm hover:text-gold">
+            Política de cookies
+          </Link>
+        </div>
+      </div>
     </footer>
   );
 }
