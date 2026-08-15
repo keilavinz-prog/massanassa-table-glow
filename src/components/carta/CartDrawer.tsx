@@ -8,6 +8,7 @@ import {
   useCart,
   type CartItem,
 } from "@/lib/cart";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 
 export function CartLines({ items }: { items: CartItem[] }) {
   return (
@@ -61,6 +62,7 @@ export function CartLines({ items }: { items: CartItem[] }) {
 }
 
 export function CartFab() {
+  const online = useOnlineStatus();
   const { hydrated, count, total, items } = useCart();
   const [open, setOpen] = useState(false);
 
