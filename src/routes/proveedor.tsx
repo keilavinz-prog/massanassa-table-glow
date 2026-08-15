@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProtectedShell } from "@/components/ProtectedHeader";
 import { requireRole } from "@/lib/route-guard";
+import { CateringProviderPanel } from "@/components/proveedor/CateringProviderPanel";
 
 export const Route = createFileRoute("/proveedor")({
   ssr: false,
@@ -26,7 +27,10 @@ function ProveedorPage() {
       <p className="font-display text-h3 text-foreground">
         Hola, {user.full_name ?? user.email}
       </p>
-      <p className="mt-2">Próximamente: solicitudes de catering y eventos (Fase 7)</p>
+      <p className="mt-1 mb-8 text-muted-foreground">
+        Toma solicitudes de catering libres y actualiza el estado de las tuyas.
+      </p>
+      <CateringProviderPanel />
     </ProtectedShell>
   );
 }
