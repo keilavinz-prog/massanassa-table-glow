@@ -16,6 +16,7 @@ import { Route as CartaRouteImport } from './routes/carta'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
+import { Route as ReservarRouteImport } from './routes/reservar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const ProveedorRoute = ProveedorRouteImport.update({
   path: '/proveedor',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReservarRoute = ReservarRouteImport.update({
+  id: '/reservar',
+  path: '/reservar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
+  '/reservar': typeof ReservarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
+  '/reservar': typeof ReservarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
+  '/reservar': typeof ReservarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/equipo'
     | '/login'
     | '/proveedor'
+    | '/reservar'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/equipo'
     | '/login'
     | '/proveedor'
+    | '/reservar'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/equipo'
     | '/login'
     | '/proveedor'
+    | '/reservar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
   ProveedorRoute: typeof ProveedorRoute
+  ReservarRoute: typeof ReservarRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProveedorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reservar': {
+      id: '/reservar'
+      path: '/reservar'
+      fullPath: '/reservar'
+      preLoaderRoute: typeof ReservarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
   ProveedorRoute: ProveedorRoute,
+  ReservarRoute: ReservarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

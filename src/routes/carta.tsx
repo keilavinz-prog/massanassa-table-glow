@@ -104,12 +104,20 @@ function CartaPage() {
             )}
             <span className="font-display text-h3 font-semibold leading-none">{s?.name}</span>
           </div>
-          <Link
-            to="/"
-            className="transition-warm inline-flex items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary"
-          >
-            <ArrowLeft className="size-4" /> Volver al inicio
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/"
+              className="transition-warm inline-flex items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary"
+            >
+              <ArrowLeft className="size-4" /> Volver al inicio
+            </Link>
+            <Link
+              to="/reservar"
+              className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-small font-medium text-primary-foreground shadow-warm hover:brightness-110"
+            >
+              Reservar mesa
+            </Link>
+          </div>
         </div>
 
         <div className="border-t border-border/60">

@@ -60,10 +60,18 @@ function Landing() {
               {s?.name}
             </span>
           </div>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/reservar"
+              className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
+            >
+              Reservar mesa
+            </Link>
           <div className="text-right text-small text-muted-foreground">
             <p className="eyebrow text-accent-foreground/70">Horario</p>
             <p>Martes a domingo · {hoursSummary}</p>
             <p>Lunes cerrado</p>
+          </div>
           </div>
         </div>
       </header>
