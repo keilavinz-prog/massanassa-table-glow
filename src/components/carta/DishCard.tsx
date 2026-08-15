@@ -9,10 +9,13 @@ export function DishCard({
   dish,
   eager = false,
   showMenuBadge = false,
+  readOnly = false,
 }: {
   dish: PublicDish;
   eager?: boolean;
   showMenuBadge?: boolean;
+  /** Modo solo lectura (p. ej. carta servida desde caché sin conexión). */
+  readOnly?: boolean;
 }) {
   const [quantity, setQuantity] = useState(1);
 
@@ -66,13 +69,14 @@ export function DishCard({
             ))}
           </ul>
         )}
+        {readOnly ? null : (
         <div className="flex items-center gap-2 pt-2">
           <div className="flex items-center gap-1 rounded-md border border-border px-1">
             <button
               type="button"
               aria-label={`Quitar una unidad de ${dish.name}`}
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="transition-warm rounded-sm p-1.5 hover:text-primary"
+              className="tap-target transition-warm inline-flex items-center justify-center rounded-sm hover:text-primary"
             >
               <Minus className="size-3.5" />
             </button>
@@ -81,7 +85,7 @@ export function DishCard({
               type="button"
               aria-label={`Añadir una unidad de ${dish.name}`}
               onClick={() => setQuantity((q) => Math.min(99, q + 1))}
-              className="transition-warm rounded-sm p-1.5 hover:text-primary"
+              className="tap-target transition-warm inline-flex items-center justify-center rounded-sm hover:text-primary"
             >
               <Plus className="size-3.5" />
             </button>
@@ -89,11 +93,12 @@ export function DishCard({
           <button
             type="button"
             onClick={handleAdd}
-            className="transition-warm flex-1 rounded-md bg-primary px-3 py-2 text-small font-medium text-primary-foreground hover:brightness-110"
+            className="tap-target transition-warm flex-1 rounded-md bg-primary px-3 py-2 text-small font-medium text-primary-foreground hover:brightness-110"
           >
             Añadir al pedido
           </button>
         </div>
+        )}
       </div>
     </article>
   );
