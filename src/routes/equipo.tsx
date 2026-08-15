@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProtectedShell } from "@/components/ProtectedHeader";
 import { requireRole } from "@/lib/route-guard";
+import { ReservationsSection } from "@/components/equipo/ReservationsSection";
 
 export const Route = createFileRoute("/equipo")({
   ssr: false,
@@ -26,7 +27,10 @@ function EquipoPage() {
       <p className="font-display text-h3 text-foreground">
         Hola, {user.full_name ?? user.email}
       </p>
-      <p className="mt-2">Próximamente: vista operativa de reservas y pedidos (Fases 5-6)</p>
+      <p className="mt-1 mb-8 text-muted-foreground">
+        Reservas del día: confirma, rechaza, modifica o cancela.
+      </p>
+      <ReservationsSection />
     </ProtectedShell>
   );
 }
