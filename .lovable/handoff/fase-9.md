@@ -58,10 +58,12 @@ suscripción vive en la página `/equipo`, no en las secciones.
   y `/proveedor`; vacíos explícitos en pedidos por fecha y catering filtrado.
 - Offline de `/carta`: la carta se guarda en `localStorage` (`fogo-carta-cache-v1`, 7 días); sin
   conexión se muestra aviso discreto "Sin conexión — mostrando la última carta guardada" y, si la
-  carga falla, el `errorComponent` renderiza la carta cacheada en solo lectura. El carrito sigue
+  carga falla, el `errorComponent` renderiza la carta cacheada en solo lectura. Un service worker
+  mínimo (`public/sw.js`) permite además recargar `/carta` sin conexión. El carrito sigue
   funcionando offline, pero pagar se deshabilita con "Necesitas conexión para pagar".
 - Asistente IA opcional: botón "✨ Sugerir descripción con IA" en el modal de plato, siempre
-  visible, deshabilitado con tooltip "IA no configurada en este entorno" si no hay clave.
+  visible, deshabilitado con tooltip "IA no configurada en este entorno" si no hay clave
+  (verificado en `/admin` → Carta → Añadir plato: visible, deshabilitado, tooltip correcto).
 
 ## Tablas/columnas creadas o modificadas
 Ninguna. No se tocaron políticas RLS (el Paso 0 no detectó fallos).
@@ -89,8 +91,10 @@ Nuevos componentes: `OfflineMenu`, `OfflineNotice`; nuevos módulos: `useOnlineS
 ## Supuestos / pendientes
 - El asistente IA queda **no activo** por falta de `ANTHROPIC_API_KEY`; al añadirla funciona sin
   cambios de código.
-- La resiliencia offline usa caché en `localStorage` (sin Service Worker) para no interferir con
-  el despliegue actual.
+- La resiliencia offline combina un service worker mínimo (`public/sw.js`, solo lectura: cachea el
+  documento de `/carta` y sus assets) con caché de la carta en `localStorage`. Verificado con
+  Playwright: recarga sin red → carta visible, `navigator.onLine === false`, aviso "Sin conexión —
+  mostrando la última carta guardada" presente tras hidratar.
 
 ## Cómo probar
 Preview: https://id-preview--f7c14abc-122a-4080-ab61-6fa28235a06a.lovable.app
