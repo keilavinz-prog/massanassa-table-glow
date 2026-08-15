@@ -3,6 +3,7 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { MapPin, Phone, UtensilsCrossed } from "lucide-react";
 import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 
 
 const landingQuery = queryOptions({
@@ -139,6 +140,7 @@ function Landing() {
         </section>
       </main>
 
+      <WhatsAppFab phone={s?.whatsapp_phone} />
       <SiteFooter settings={s} />
 
     </div>

@@ -30,6 +30,7 @@ import {
   todayISO,
 } from "@/lib/reservation-rules";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { cn } from "@/lib/utils";
 
 const landingQuery = queryOptions({
@@ -353,6 +354,7 @@ function ReservarPage() {
         )}
       </main>
 
+      <WhatsAppFab phone={landing.settings?.whatsapp_phone} />
       <SiteFooter settings={landing.settings ?? {}} />
     </div>
   );
