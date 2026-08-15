@@ -14,7 +14,310 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      catering_requests: {
+        Row: {
+          assigned_to: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at: string | null
+          event_date: string | null
+          event_type: string | null
+          guests: number | null
+          id: string
+          message: string | null
+          status: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          guests?: number | null
+          id?: string
+          message?: string | null
+          status?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string | null
+          event_date?: string | null
+          event_type?: string | null
+          guests?: number | null
+          id?: string
+          message?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "catering_requests_assigned_to_fkey"
+            columns: ["assigned_to"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dishes: {
+        Row: {
+          allergens: string[]
+          category_id: string
+          created_at: string | null
+          description: string | null
+          id: string
+          image_url: string | null
+          is_available: boolean
+          is_menu_del_dia: boolean
+          name: string
+          price: number
+          sort_order: number
+          updated_at: string | null
+        }
+        Insert: {
+          allergens?: string[]
+          category_id: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          is_menu_del_dia?: boolean
+          name: string
+          price: number
+          sort_order?: number
+          updated_at?: string | null
+        }
+        Update: {
+          allergens?: string[]
+          category_id?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          is_menu_del_dia?: boolean
+          name?: string
+          price?: number
+          sort_order?: number
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dishes_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id: string
+          items: Json
+          notes: string | null
+          order_type: string
+          status: string
+          stripe_payment_intent_id: string | null
+          total: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          id?: string
+          items: Json
+          notes?: string | null
+          order_type?: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          total: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          id?: string
+          items?: Json
+          notes?: string | null
+          order_type?: string
+          status?: string
+          stripe_payment_intent_id?: string | null
+          total?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          role?: string
+        }
+        Update: {
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string
+        }
+        Relationships: []
+      }
+      reservations: {
+        Row: {
+          created_at: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          google_calendar_event_id: string | null
+          id: string
+          notes: string | null
+          party_size: number
+          reservation_date: string
+          reservation_time: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_email: string
+          customer_name: string
+          customer_phone: string
+          google_calendar_event_id?: string | null
+          id?: string
+          notes?: string | null
+          party_size: number
+          reservation_date: string
+          reservation_time: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string
+          google_calendar_event_id?: string | null
+          id?: string
+          notes?: string | null
+          party_size?: number
+          reservation_date?: string
+          reservation_time?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      restaurant_settings: {
+        Row: {
+          address: string
+          city: string
+          created_at: string | null
+          description: string | null
+          email: string | null
+          facebook_url: string | null
+          hero_image_url: string | null
+          id: number
+          instagram_url: string | null
+          lat: number | null
+          lng: number | null
+          logo_url: string | null
+          name: string
+          opening_hours: Json
+          phone: string
+          postal_code: string | null
+          slug: string
+          updated_at: string | null
+          whatsapp_phone: string | null
+        }
+        Insert: {
+          address: string
+          city: string
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          hero_image_url?: string | null
+          id?: number
+          instagram_url?: string | null
+          lat?: number | null
+          lng?: number | null
+          logo_url?: string | null
+          name: string
+          opening_hours: Json
+          phone: string
+          postal_code?: string | null
+          slug: string
+          updated_at?: string | null
+          whatsapp_phone?: string | null
+        }
+        Update: {
+          address?: string
+          city?: string
+          created_at?: string | null
+          description?: string | null
+          email?: string | null
+          facebook_url?: string | null
+          hero_image_url?: string | null
+          id?: number
+          instagram_url?: string | null
+          lat?: number | null
+          lng?: number | null
+          logo_url?: string | null
+          name?: string
+          opening_hours?: Json
+          phone?: string
+          postal_code?: string | null
+          slug?: string
+          updated_at?: string | null
+          whatsapp_phone?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
