@@ -196,10 +196,14 @@ function PedidoPage() {
 
               <button
                 type="submit"
-                disabled={submitting || items.length === 0 || !consent}
-                className="transition-warm w-full rounded-md bg-primary py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110 disabled:opacity-60"
+                disabled={submitting || items.length === 0 || !consent || !online}
+                className="tap-target transition-warm w-full rounded-md bg-primary py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110 disabled:opacity-60"
               >
-                {submitting ? "Redirigiendo al pago…" : `Pagar con tarjeta — ${total.toFixed(2)}€`}
+                {!online
+                  ? "Necesitas conexión para pagar"
+                  : submitting
+                    ? "Redirigiendo al pago…"
+                    : `Pagar con tarjeta — ${total.toFixed(2)}€`}
               </button>
             </form>
           </section>
