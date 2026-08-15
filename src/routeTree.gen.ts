@@ -15,6 +15,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CartaRouteImport } from './routes/carta'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PedidoRouteImport } from './routes/pedido'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
 
@@ -48,6 +49,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PedidoRoute = PedidoRouteImport.update({
+  id: '/pedido',
+  path: '/pedido',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProveedorRoute = ProveedorRouteImport.update({
   id: '/proveedor',
   path: '/proveedor',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
+  '/pedido': typeof PedidoRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/carta'
     | '/equipo'
     | '/login'
+    | '/pedido'
     | '/proveedor'
     | '/reservar'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   CartaRoute: typeof CartaRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
+  PedidoRoute: typeof PedidoRoute
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pedido': {
+      id: '/pedido'
+      path: '/pedido'
+      fullPath: '/pedido'
+      preLoaderRoute: typeof PedidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/proveedor': {
       id: '/proveedor'
       path: '/proveedor'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartaRoute: CartaRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
+  PedidoRoute: PedidoRoute,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
 }

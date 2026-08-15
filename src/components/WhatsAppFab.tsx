@@ -1,6 +1,6 @@
 const MESSAGE = "Hola, quiero hacer una consulta sobre El Fogó de Massanassa 🍽️";
 
-export function WhatsAppFab({ phone }: { phone?: string | null }) {
+export function WhatsAppFab({ phone }: { phone?: string | null | undefined }) {
   if (!phone) return null;
   const digits = phone.replace(/[^\d]/g, "");
   if (!digits) return null;
