@@ -5,6 +5,7 @@ import { requireRole } from "@/lib/route-guard";
 import { CartaSection } from "@/components/admin/CartaSection";
 import { RestauranteSection } from "@/components/admin/RestauranteSection";
 import { QrSection } from "@/components/admin/QrSection";
+import { CateringSection } from "@/components/admin/CateringSection";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -27,6 +28,7 @@ const TABS = [
   { id: "carta", label: "Carta" },
   { id: "restaurante", label: "Restaurante" },
   { id: "qr", label: "Código QR" },
+  { id: "catering", label: "Catering" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -63,6 +65,7 @@ function AdminPage() {
           {tab === "carta" && <CartaSection />}
           {tab === "restaurante" && <RestauranteSection />}
           {tab === "qr" && <QrSection />}
+          {tab === "catering" && <CateringSection />}
         </div>
       </main>
     </div>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
@@ -24,6 +24,7 @@ import {
   type ReservationStatus,
 } from "@/lib/reservation-rules";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRealtimeTables } from "@/hooks/useRealtimeTables";
 
 const statusLabel: Record<ReservationStatus, string> = {
   pending: "Pendiente",
@@ -42,7 +43,7 @@ const statusBadge: Record<ReservationStatus, string> = {
 const inputClass =
   "transition-warm mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-body outline-none focus:border-primary focus:ring-2 focus:ring-primary/25";
 
-export function ReservationsSection() {
+export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode }) {
   const [date, setDate] = useState<string>(todayISO());
   const [editing, setEditing] = useState<Reservation | null>(null);
   const queryClient = useQueryClient();
@@ -59,9 +60,12 @@ export function ReservationsSection() {
   const rejectFn = useServerFn(rejectReservation);
   const cancelFn = useServerFn(cancelReservation);
 
-  function invalidate() {
+  const invalidate = useCallback(() => {
     queryClient.invalidateQueries({ queryKey: ["reservations"] });
-  }
+  }, [queryClient]);
+
+  // Realtime: cualquier cambio en reservas refresca la vista sin recargar.
+  useRealtimeTables(["reservations"], invalidate);
 
   const confirmMut = useMutation({
     mutationFn: (id: string) => confirmFn({ data: { id } }),
@@ -107,7 +111,7 @@ export function ReservationsSection() {
 
   return (
     <section className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-2 lg:max-w-xl">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <SummaryCard
           value={data?.pendingTotal ?? 0}
           label="reservas pendientes"
@@ -118,6 +122,7 @@ export function ReservationsSection() {
           label={date === todayISO() ? "confirmadas para hoy" : "confirmadas ese día"}
           badgeClass="bg-olive text-white"
         />
+        {extraSummary}
       </div>
 
       <div className="flex flex-wrap items-end gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm">

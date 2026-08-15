@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccesoDenegadoRouteImport } from './routes/acceso-denegado'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CartaRouteImport } from './routes/carta'
+import { Route as CateringRouteImport } from './routes/catering'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PedidoRouteImport } from './routes/pedido'
@@ -39,6 +40,11 @@ const AdminRoute = AdminRouteImport.update({
 const CartaRoute = CartaRouteImport.update({
   id: '/carta',
   path: '/carta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CateringRoute = CateringRouteImport.update({
+  id: '/catering',
+  path: '/catering',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EquipoRoute = EquipoRouteImport.update({
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
   '/carta': typeof CartaRoute
+  '/catering': typeof CateringRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByTo {
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
   '/carta': typeof CartaRoute
+  '/catering': typeof CateringRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
   '/carta': typeof CartaRoute
+  '/catering': typeof CateringRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
     | '/acceso-denegado'
     | '/admin'
     | '/carta'
+    | '/catering'
     | '/equipo'
     | '/login'
     | '/pedido'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/acceso-denegado'
     | '/admin'
     | '/carta'
+    | '/catering'
     | '/equipo'
     | '/login'
     | '/pedido'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/acceso-denegado'
     | '/admin'
     | '/carta'
+    | '/catering'
     | '/equipo'
     | '/login'
     | '/pedido'
@@ -164,6 +176,7 @@ export interface RootRouteChildren {
   AccesoDenegadoRoute: typeof AccesoDenegadoRoute
   AdminRoute: typeof AdminRoute
   CartaRoute: typeof CartaRoute
+  CateringRoute: typeof CateringRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
   PedidoRoute: typeof PedidoRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/carta'
       fullPath: '/carta'
       preLoaderRoute: typeof CartaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/catering': {
+      id: '/catering'
+      path: '/catering'
+      fullPath: '/catering'
+      preLoaderRoute: typeof CateringRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipo': {
@@ -260,6 +280,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccesoDenegadoRoute: AccesoDenegadoRoute,
   AdminRoute: AdminRoute,
   CartaRoute: CartaRoute,
+  CateringRoute: CateringRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
   PedidoRoute: PedidoRoute,
