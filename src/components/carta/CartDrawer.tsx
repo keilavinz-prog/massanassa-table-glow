@@ -81,7 +81,7 @@ export function CartFab() {
 
       {open && (
         <div className="fixed inset-0 z-50 flex h-[100dvh] justify-end bg-dark-brown/50">
-          <aside className="flex h-full w-full max-w-sm flex-col bg-cream shadow-warm-lg">
+          <aside className="safe-pt safe-px flex h-full w-full max-w-sm flex-col overscroll-contain bg-cream shadow-warm-lg">
             <div className="flex items-center justify-between border-b border-border/60 p-6">
               <h2 className="font-display text-h3">Tu pedido</h2>
               <button
@@ -98,20 +98,30 @@ export function CartFab() {
               <CartLines items={items} />
             </div>
 
-            <div className="space-y-3 border-t border-border/60 p-6">
+            <div className="safe-pb space-y-3 border-t border-border/60 p-6">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Total</span>
                 <span className="font-display text-h3 font-bold text-primary">
                   {total.toFixed(2)} €
                 </span>
               </div>
-              <Link
-                to="/pedido"
-                onClick={() => setOpen(false)}
-                className="transition-warm block w-full rounded-md bg-primary py-3 text-center font-medium text-primary-foreground shadow-warm hover:brightness-110"
-              >
-                Ir a pagar
-              </Link>
+              {online ? (
+                <Link
+                  to="/pedido"
+                  onClick={() => setOpen(false)}
+                  className="transition-warm tap-target block w-full rounded-md bg-primary py-3 text-center font-medium text-primary-foreground shadow-warm hover:brightness-110"
+                >
+                  Ir a pagar
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  className="tap-target w-full cursor-not-allowed rounded-md bg-primary/60 py-3 text-center font-medium text-primary-foreground"
+                >
+                  Necesitas conexión para pagar
+                </button>
+              )}
               <button
                 type="button"
                 onClick={() => clearCart()}
