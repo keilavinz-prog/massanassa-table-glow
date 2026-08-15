@@ -26,7 +26,12 @@ self.addEventListener("fetch", (event) => {
   if (url.origin !== self.location.origin) return;
 
   const isCartaDoc = req.mode === "navigate" && url.pathname === "/carta";
-  const isAsset = /\.(?:js|css|woff2?|svg|png|jpg|jpeg|webp|ico)$/.test(url.pathname);
+  const isAsset =
+    /\.(?:js|jsx|ts|tsx|mjs|css|woff2?|svg|png|jpg|jpeg|webp|ico)$/.test(url.pathname) ||
+    url.pathname.startsWith("/_build/") ||
+    url.pathname.startsWith("/@") ||
+    url.pathname.startsWith("/src/") ||
+    url.pathname.startsWith("/node_modules/");
   if (!isCartaDoc && !isAsset) return;
 
   event.respondWith(
@@ -39,7 +44,9 @@ self.addEventListener("fetch", (event) => {
         }
         return res;
       } catch (error) {
-        const cached = await caches.match(isCartaDoc ? "/carta" : req);
+        const cached =
+          (await caches.match(isCartaDoc ? "/carta" : req)) ??
+          (isCartaDoc ? undefined : await caches.match(req, { ignoreSearch: true }));
         if (cached) return cached;
         throw error;
       }
