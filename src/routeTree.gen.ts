@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccesoDenegadoRouteImport } from './routes/acceso-denegado'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CartaRouteImport } from './routes/carta'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
@@ -29,6 +30,11 @@ const AccesoDenegadoRoute = AccesoDenegadoRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartaRoute = CartaRouteImport.update({
+  id: '/carta',
+  path: '/carta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EquipoRoute = EquipoRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/proveedor': typeof ProveedorRoute
@@ -75,14 +84,28 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login' | '/proveedor'
+    | '/'
+    | '/acceso-denegado'
+    | '/admin'
+    | '/carta'
+    | '/equipo'
+    | '/login'
+    | '/proveedor'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acceso-denegado' | '/admin' | '/equipo' | '/login' | '/proveedor'
+  to:
+    | '/'
+    | '/acceso-denegado'
+    | '/admin'
+    | '/carta'
+    | '/equipo'
+    | '/login'
+    | '/proveedor'
   id:
     | '__root__'
     | '/'
     | '/acceso-denegado'
     | '/admin'
+    | '/carta'
     | '/equipo'
     | '/login'
     | '/proveedor'
@@ -92,6 +115,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccesoDenegadoRoute: typeof AccesoDenegadoRoute
   AdminRoute: typeof AdminRoute
+  CartaRoute: typeof CartaRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
   ProveedorRoute: typeof ProveedorRoute
@@ -118,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carta': {
+      id: '/carta'
+      path: '/carta'
+      fullPath: '/carta'
+      preLoaderRoute: typeof CartaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipo': {
@@ -148,6 +179,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccesoDenegadoRoute: AccesoDenegadoRoute,
   AdminRoute: AdminRoute,
+  CartaRoute: CartaRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
   ProveedorRoute: ProveedorRoute,
