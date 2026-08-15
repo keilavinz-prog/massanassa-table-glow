@@ -4,6 +4,7 @@ import { MapPin, Phone, UtensilsCrossed } from "lucide-react";
 import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { LocationMap } from "@/components/LocationMap";
 
 
 const landingQuery = queryOptions({
@@ -110,6 +111,37 @@ function Landing() {
           <p className="eyebrow text-olive">Sobre nosotros</p>
           <h2 className="mt-3 font-display text-h2">La taberna del barrio</h2>
           <p className="mt-4 text-muted-foreground">{s?.description}</p>
+        </section>
+
+        <section className="mx-auto max-w-4xl px-6 pb-16">
+          <p className="eyebrow text-olive">Cómo llegar</p>
+          <h2 className="mt-3 font-display text-h2">Dónde estamos</h2>
+          <p className="mt-4 text-muted-foreground">
+            {s?.address}, {s?.postal_code} {s?.city}
+          </p>
+          <div className="mt-6">
+            <LocationMap settings={s} />
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-4xl px-6 pb-16">
+          <div className="rounded-lg border border-gold/60 bg-cream p-8 text-center shadow-warm">
+            <p className="eyebrow text-olive">Catering y eventos</p>
+            <h2 className="mt-3 font-display text-h2 text-dark-brown">
+              Llevamos la paella a tu celebración
+            </h2>
+            <p className="mt-4 text-dark-brown/80">
+              Bodas, comuniones, cumpleaños y eventos de empresa con nuestros arroces en
+              paella de leña y la cocina de siempre. Preparamos una propuesta a medida según
+              fecha, número de invitados y presupuesto.
+            </p>
+            <Link
+              to="/catering"
+              className="transition-warm mt-6 inline-flex rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110"
+            >
+              ¿Organizas un evento? Solicita presupuesto
+            </Link>
+          </div>
         </section>
 
         <section className="mx-auto max-w-6xl px-6 pb-16">

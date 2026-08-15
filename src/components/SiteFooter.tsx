@@ -52,8 +52,14 @@ export function SiteFooter({ settings: s }: { settings: FooterSettings }) {
             )}
           </div>
           <Link
+            to="/catering"
+            className="transition-warm mt-6 block text-small text-cream/80 underline-offset-4 hover:text-gold hover:underline"
+          >
+            ¿Organizas un evento? Solicita presupuesto
+          </Link>
+          <Link
             to="/login"
-            className="transition-warm mt-6 inline-block text-small text-cream/60 underline-offset-4 hover:text-gold hover:underline"
+            className="transition-warm mt-3 inline-block text-small text-cream/60 underline-offset-4 hover:text-gold hover:underline"
           >
             Acceso equipo
           </Link>
