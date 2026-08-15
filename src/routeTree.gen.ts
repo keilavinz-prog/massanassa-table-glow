@@ -12,11 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccesoDenegadoRouteImport } from './routes/acceso-denegado'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as CartaRouteImport } from './routes/carta'
 import { Route as CateringRouteImport } from './routes/catering'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as EquipoRouteImport } from './routes/equipo'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PedidoRouteImport } from './routes/pedido'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
 import { Route as PedidoConfirmacionRouteImport } from './routes/pedido_.confirmacion'
@@ -37,6 +40,11 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AvisoLegalRoute = AvisoLegalRouteImport.update({
+  id: '/aviso-legal',
+  path: '/aviso-legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CartaRoute = CartaRouteImport.update({
   id: '/carta',
   path: '/carta',
@@ -45,6 +53,11 @@ const CartaRoute = CartaRouteImport.update({
 const CateringRoute = CateringRouteImport.update({
   id: '/catering',
   path: '/catering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EquipoRoute = EquipoRouteImport.update({
@@ -60,6 +73,11 @@ const LoginRoute = LoginRouteImport.update({
 const PedidoRoute = PedidoRouteImport.update({
   id: '/pedido',
   path: '/pedido',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProveedorRoute = ProveedorRouteImport.update({
@@ -87,11 +105,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/carta': typeof CartaRoute
   '/catering': typeof CateringRoute
+  '/cookies': typeof CookiesRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
@@ -101,11 +122,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/carta': typeof CartaRoute
   '/catering': typeof CateringRoute
+  '/cookies': typeof CookiesRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
@@ -116,11 +140,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/acceso-denegado': typeof AccesoDenegadoRoute
   '/admin': typeof AdminRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/carta': typeof CartaRoute
   '/catering': typeof CateringRoute
+  '/cookies': typeof CookiesRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
   '/pedido': typeof PedidoRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
   '/pedido_/confirmacion': typeof PedidoConfirmacionRoute
@@ -132,11 +159,14 @@ export interface FileRouteTypes {
     | '/'
     | '/acceso-denegado'
     | '/admin'
+    | '/aviso-legal'
     | '/carta'
     | '/catering'
+    | '/cookies'
     | '/equipo'
     | '/login'
     | '/pedido'
+    | '/privacidad'
     | '/proveedor'
     | '/reservar'
     | '/pedido/confirmacion'
@@ -146,11 +176,14 @@ export interface FileRouteTypes {
     | '/'
     | '/acceso-denegado'
     | '/admin'
+    | '/aviso-legal'
     | '/carta'
     | '/catering'
+    | '/cookies'
     | '/equipo'
     | '/login'
     | '/pedido'
+    | '/privacidad'
     | '/proveedor'
     | '/reservar'
     | '/pedido/confirmacion'
@@ -160,11 +193,14 @@ export interface FileRouteTypes {
     | '/'
     | '/acceso-denegado'
     | '/admin'
+    | '/aviso-legal'
     | '/carta'
     | '/catering'
+    | '/cookies'
     | '/equipo'
     | '/login'
     | '/pedido'
+    | '/privacidad'
     | '/proveedor'
     | '/reservar'
     | '/pedido_/confirmacion'
@@ -175,11 +211,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccesoDenegadoRoute: typeof AccesoDenegadoRoute
   AdminRoute: typeof AdminRoute
+  AvisoLegalRoute: typeof AvisoLegalRoute
   CartaRoute: typeof CartaRoute
   CateringRoute: typeof CateringRoute
+  CookiesRoute: typeof CookiesRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
   PedidoRoute: typeof PedidoRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
   PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
@@ -209,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aviso-legal': {
+      id: '/aviso-legal'
+      path: '/aviso-legal'
+      fullPath: '/aviso-legal'
+      preLoaderRoute: typeof AvisoLegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/carta': {
       id: '/carta'
       path: '/carta'
@@ -221,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/catering'
       fullPath: '/catering'
       preLoaderRoute: typeof CateringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipo': {
@@ -242,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/pedido'
       fullPath: '/pedido'
       preLoaderRoute: typeof PedidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proveedor': {
@@ -279,11 +339,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccesoDenegadoRoute: AccesoDenegadoRoute,
   AdminRoute: AdminRoute,
+  AvisoLegalRoute: AvisoLegalRoute,
   CartaRoute: CartaRoute,
   CateringRoute: CateringRoute,
+  CookiesRoute: CookiesRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
   PedidoRoute: PedidoRoute,
+  PrivacidadRoute: PrivacidadRoute,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
   PedidoConfirmacionRoute: PedidoConfirmacionRoute,

@@ -15,6 +15,7 @@ import {
 } from "@/lib/catering-schemas";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { ConsentCheckbox } from "@/components/legal/ConsentCheckbox";
 
 const landingQuery = queryOptions({
   queryKey: ["landing"],
@@ -59,6 +60,7 @@ function CateringPage() {
   const s = data.settings;
 
   const [done, setDone] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [form, setForm] = useState({
     contact_name: "",
@@ -236,9 +238,15 @@ function CateringPage() {
                 </p>
               )}
 
+              <ConsentCheckbox
+                checked={consent}
+                onChange={setConsent}
+                purpose="responder a tu solicitud de presupuesto de catering"
+              />
+
               <button
                 type="submit"
-                disabled={mutation.isPending}
+                disabled={mutation.isPending || !consent}
                 className="transition-warm w-full rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110 disabled:opacity-60 sm:w-auto"
               >
                 {mutation.isPending ? "Enviando…" : "Solicitar presupuesto"}

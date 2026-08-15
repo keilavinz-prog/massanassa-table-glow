@@ -13,6 +13,7 @@ import {
 import { es } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { createPublicReservation } from "@/lib/reservations.functions";
+import { ConsentCheckbox } from "@/components/legal/ConsentCheckbox";
 import { getLandingData } from "@/lib/restaurant.functions";
 import {
   BIG_GROUP_MESSAGE,
@@ -96,6 +97,7 @@ const inputClass =
 function ReservarPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [consent, setConsent] = useState(false);
   const [confirmed, setConfirmed] = useState<FormState | null>(null);
   const { data: landing } = useSuspenseQuery(landingQuery);
 
@@ -341,9 +343,15 @@ function ReservarPage() {
               </p>
             )}
 
+            <ConsentCheckbox
+              checked={consent}
+              onChange={setConsent}
+              purpose="gestionar y confirmar tu reserva"
+            />
+
             <button
               type="submit"
-              disabled={mutation.isPending || bigGroup}
+              disabled={mutation.isPending || bigGroup || !consent}
               className={cn(
                 "transition-warm w-full rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110 disabled:opacity-60 sm:w-auto",
               )}
