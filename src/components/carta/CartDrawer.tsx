@@ -62,7 +62,7 @@ export function CartLines({ items }: { items: CartItem[] }) {
 
 export function CartFab() {
   const { hydrated, count, total, items } = useCart();
-  const [open, setOpen] = useOpenState();
+  const [open, setOpen] = useState(false);
 
   if (!hydrated || count === 0) return null;
 
@@ -125,10 +125,4 @@ export function CartFab() {
       )}
     </>
   );
-}
-
-import { useState } from "react";
-
-function useOpenState() {
-  return useState(false);
 }
