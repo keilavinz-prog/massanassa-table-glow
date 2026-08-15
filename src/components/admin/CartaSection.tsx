@@ -434,16 +434,34 @@ export function CartaSection() {
                 onChange={(e) => setDishDraft({ ...dishDraft, name: e.target.value })}
               />
             </label>
-            <label className="block space-y-1">
-              <span className="text-small font-medium">Descripción</span>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-small font-medium" id="dish-description-label">
+                  Descripción
+                </span>
+                <AiDescriptionButton
+                  configured={aiConfigured}
+                  name={dishDraft.name}
+                  category={categories.find((c) => c.id === dishDraft.category_id)?.name ?? ""}
+                  allergens={dishDraft.allergens}
+                  onSuggestion={(text) =>
+                    setDishDraft((prev) => (prev ? { ...prev, description: text } : prev))
+                  }
+                />
+              </div>
               <textarea
+                aria-labelledby="dish-description-label"
                 className={inputClass}
                 rows={3}
                 placeholder="Describe el plato brevemente"
                 value={dishDraft.description}
                 onChange={(e) => setDishDraft({ ...dishDraft, description: e.target.value })}
               />
-            </label>
+              <p className="text-small text-muted-foreground">
+                Revisa y edita la sugerencia antes de guardar: nunca se guarda sola.
+              </p>
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="block space-y-1">
                 <span className="text-small font-medium">Precio</span>
