@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ProtectedShell } from "@/components/ProtectedHeader";
+import { ProtectedHeader } from "@/components/ProtectedHeader";
 import { requireRole } from "@/lib/route-guard";
+import { CartaSection } from "@/components/admin/CartaSection";
+import { RestauranteSection } from "@/components/admin/RestauranteSection";
+import { QrSection } from "@/components/admin/QrSection";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -19,11 +23,48 @@ export const Route = createFileRoute("/admin")({
   component: AdminPage,
 });
 
+const TABS = [
+  { id: "carta", label: "Carta" },
+  { id: "restaurante", label: "Restaurante" },
+  { id: "qr", label: "Código QR" },
+] as const;
+
+type TabId = (typeof TABS)[number]["id"];
+
 function AdminPage() {
   const { user } = Route.useRouteContext();
+  const [tab, setTab] = useState<TabId>("carta");
+
   return (
-    <ProtectedShell user={user} title="Panel de Administración — El Fogó de Massanassa">
-      <p>Próximamente: gestión de carta, configuración y QR (Fase 3)</p>
-    </ProtectedShell>
+    <div className="min-h-screen bg-background text-foreground">
+      <ProtectedHeader user={user} />
+      <main className="mx-auto max-w-6xl px-6 py-12">
+        <h1 className="font-display text-h1">Panel de Administración</h1>
+        <p className="mt-2 text-muted-foreground">El Fogó de Massanassa</p>
+
+        <nav className="mt-8 flex flex-wrap gap-2 border-b border-border/70 pb-3">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTab(t.id)}
+              className={`transition-warm rounded-md px-4 py-2 text-body font-medium ${
+                tab === t.id
+                  ? "bg-terracota text-white shadow-warm"
+                  : "border border-input bg-background hover:bg-accent/20"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-8">
+          {tab === "carta" && <CartaSection />}
+          {tab === "restaurante" && <RestauranteSection />}
+          {tab === "qr" && <QrSection />}
+        </div>
+      </main>
+    </div>
   );
 }
