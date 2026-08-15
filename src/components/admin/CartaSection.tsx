@@ -66,10 +66,73 @@ function Modal({
   );
 }
 
+/**
+ * Botón opcional de redacción asistida. Siempre visible; deshabilitado con
+ * tooltip cuando el entorno no tiene el asistente configurado.
+ */
+function AiDescriptionButton({
+  configured,
+  name,
+  category,
+  allergens,
+  onSuggestion,
+}: {
+  configured: boolean;
+  name: string;
+  category: string;
+  allergens: string[];
+  onSuggestion: (text: string) => void;
+}) {
+  const suggestFn = useServerFn(suggestDishDescription);
+  const mutation = useMutation({
+    mutationFn: () => suggestFn({ data: { name: name.trim(), category, allergens } }),
+    onSuccess: (result) => {
+      onSuggestion(result.suggestion);
+      toast.success("Sugerencia lista: revísala antes de guardar");
+    },
+    onError: (err: Error) => toast.error(err.message),
+  });
+
+  const hasName = name.trim().length >= 2;
+  const disabled = !configured || !hasName || mutation.isPending;
+  const title = !configured
+    ? "IA no configurada en este entorno"
+    : !hasName
+      ? "Escribe primero el nombre del plato"
+      : "Genera una sugerencia de descripción";
+
+  return (
+    <button
+      type="button"
+      onClick={() => mutation.mutate()}
+      disabled={disabled}
+      title={title}
+      aria-label={title}
+      className={`${ghostBtn} tap-target disabled:cursor-not-allowed`}
+    >
+      {mutation.isPending ? (
+        <Loader2 className="size-4 animate-spin" />
+      ) : (
+        <Sparkles className="size-4 text-gold" />
+      )}
+      {mutation.isPending ? "Redactando…" : "Sugerir descripción con IA"}
+    </button>
+  );
+}
+
 export function CartaSection() {
   const queryClient = useQueryClient();
   const fetchMenu = useServerFn(getAdminMenu);
   const { data, isLoading } = useQuery({ queryKey: ["admin-menu"], queryFn: () => fetchMenu() });
+
+  const aiStatusFn = useServerFn(getAiAssistantStatus);
+  const { data: aiStatus } = useQuery({
+    queryKey: ["ai-assistant-status"],
+    queryFn: () => aiStatusFn(),
+    staleTime: 10 * 60 * 1000,
+  });
+  const aiConfigured = aiStatus?.configured ?? false;
+
 
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const [categoryDraft, setCategoryDraft] = useState<CategoryDraft | null>(null);
