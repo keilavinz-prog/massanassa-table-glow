@@ -18,6 +18,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PedidoRouteImport } from './routes/pedido'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
+import { Route as PedidoConfirmacionRouteImport } from './routes/pedido.confirmacion'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const ReservarRoute = ReservarRouteImport.update({
   path: '/reservar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PedidoConfirmacionRoute = PedidoConfirmacionRouteImport.update({
+  id: '/confirmacion',
+  path: '/confirmacion',
+  getParentRoute: () => PedidoRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,9 +78,10 @@ export interface FileRoutesByFullPath {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRoute
+  '/pedido': typeof PedidoRouteWithChildren
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,9 +90,10 @@ export interface FileRoutesByTo {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRoute
+  '/pedido': typeof PedidoRouteWithChildren
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,9 +103,10 @@ export interface FileRoutesById {
   '/carta': typeof CartaRoute
   '/equipo': typeof EquipoRoute
   '/login': typeof LoginRoute
-  '/pedido': typeof PedidoRoute
+  '/pedido': typeof PedidoRouteWithChildren
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/pedido/confirmacion': typeof PedidoConfirmacionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido/confirmacion'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido/confirmacion'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/pedido'
     | '/proveedor'
     | '/reservar'
+    | '/pedido/confirmacion'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,7 +154,7 @@ export interface RootRouteChildren {
   CartaRoute: typeof CartaRoute
   EquipoRoute: typeof EquipoRoute
   LoginRoute: typeof LoginRoute
-  PedidoRoute: typeof PedidoRoute
+  PedidoRoute: typeof PedidoRouteWithChildren
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
 }
@@ -212,8 +224,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pedido/confirmacion': {
+      id: '/pedido/confirmacion'
+      path: '/confirmacion'
+      fullPath: '/pedido/confirmacion'
+      preLoaderRoute: typeof PedidoConfirmacionRouteImport
+      parentRoute: typeof PedidoRoute
+    }
   }
 }
+
+interface PedidoRouteChildren {
+  PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
+}
+
+const PedidoRouteChildren: PedidoRouteChildren = {
+  PedidoConfirmacionRoute: PedidoConfirmacionRoute,
+}
+
+const PedidoRouteWithChildren =
+  PedidoRoute._addFileChildren(PedidoRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -222,7 +252,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartaRoute: CartaRoute,
   EquipoRoute: EquipoRoute,
   LoginRoute: LoginRoute,
-  PedidoRoute: PedidoRoute,
+  PedidoRoute: PedidoRouteWithChildren,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
 }
