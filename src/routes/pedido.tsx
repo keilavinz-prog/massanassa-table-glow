@@ -12,6 +12,7 @@ import { CartLines } from "@/components/carta/CartDrawer";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { ConsentCheckbox } from "@/components/legal/ConsentCheckbox";
+import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 
 const landingQuery = queryOptions({
   queryKey: ["landing-data"],
@@ -51,6 +52,7 @@ function PedidoPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", notes: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const online = useOnlineStatus();
   const [consent, setConsent] = useState(false);
 
   useEffect(() => {
