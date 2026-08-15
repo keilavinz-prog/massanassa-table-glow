@@ -159,9 +159,16 @@ function Landing() {
                 </a>
               )}
             </div>
+            <Link
+              to="/login"
+              className="transition-warm mt-6 inline-block text-small text-cream/60 underline-offset-4 hover:text-gold hover:underline"
+            >
+              Acceso equipo
+            </Link>
           </div>
         </div>
       </footer>
+
     </div>
   );
 }
