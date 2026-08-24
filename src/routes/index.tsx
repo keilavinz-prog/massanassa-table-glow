@@ -107,14 +107,14 @@ function Landing() {
         </section>
 
         <section className="mx-auto max-w-3xl px-6 py-16 text-center">
-          <p className="eyebrow text-olive">Sobre nosotros</p>
-          <h2 className="mt-3 font-display text-h2">La taberna del barrio</h2>
+          <p className="eyebrow text-olive">{c.about_eyebrow}</p>
+          <h2 className="mt-3 font-display text-h2">{c.about_title}</h2>
           <p className="mt-4 text-muted-foreground">{s?.description}</p>
         </section>
 
         <section className="mx-auto max-w-4xl px-6 pb-16">
-          <p className="eyebrow text-olive">Cómo llegar</p>
-          <h2 className="mt-3 font-display text-h2">Dónde estamos</h2>
+          <p className="eyebrow text-olive">{c.location_eyebrow}</p>
+          <h2 className="mt-3 font-display text-h2">{c.location_title}</h2>
           <p className="mt-4 text-muted-foreground">
             {s?.address}, {s?.postal_code} {s?.city}
           </p>
