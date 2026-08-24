@@ -211,6 +211,9 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
                   <h3 className="font-display text-h3 text-dark-brown">
                     {normalizeTime(r.reservation_time)}
                   </h3>
+                  <p className="text-small text-muted-foreground">
+                    {formatLongDate(r.reservation_date)}
+                  </p>
                   <p className="mt-1 font-medium">{r.customer_name}</p>
                   <p className="mt-1 flex items-center gap-2 text-small text-muted-foreground">
                     <Phone className="size-4" /> {r.customer_phone}
