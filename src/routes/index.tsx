@@ -90,7 +90,7 @@ function Landing() {
               {s?.city} · {s?.postal_code}
             </p>
             <h1 className="mt-3 max-w-2xl font-display text-h1 text-cream">
-              Cocina valenciana de mercado en Massanassa
+              {c.hero_title}
             </h1>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
