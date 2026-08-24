@@ -24,6 +24,22 @@ export const Route = createFileRoute("/admin")({
     ],
   }),
   component: AdminPage,
+  errorComponent: ({ error }) => (
+    <div className="flex min-h-screen items-center justify-center bg-background px-6">
+      <div className="max-w-md space-y-4 rounded-md bg-card p-8 text-center shadow-warm">
+        <h1 className="font-display text-h3">No se pudo cargar el panel</h1>
+        <p className="text-small text-muted-foreground">
+          {error instanceof Error ? error.message : "Error inesperado."}
+        </p>
+        <a
+          href="/login"
+          className="tap-target transition-warm inline-flex items-center justify-center rounded-md bg-terracota px-5 py-2.5 text-body font-medium text-white hover:opacity-90"
+        >
+          Volver a iniciar sesión
+        </a>
+      </div>
+    </div>
+  ),
 });
 
 const TABS = [

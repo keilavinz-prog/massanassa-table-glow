@@ -24,6 +24,7 @@ export function LandingSection() {
   const { data, isLoading } = useQuery({
     queryKey: ["admin-settings"],
     queryFn: () => fetchSettings(),
+    throwOnError: true,
   });
   const saveFn = useServerFn(saveLandingContent);
 

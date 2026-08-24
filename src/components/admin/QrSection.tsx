@@ -16,6 +16,7 @@ export function QrSection() {
   const { data: settings } = useQuery({
     queryKey: ["admin-settings"],
     queryFn: () => fetchSettings(),
+    throwOnError: true,
   });
 
   const [menuUrl, setMenuUrl] = useState("");

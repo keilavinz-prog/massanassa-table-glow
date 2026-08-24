@@ -34,6 +34,7 @@ export function RestauranteSection() {
   const { data, isLoading } = useQuery({
     queryKey: ["admin-settings"],
     queryFn: () => fetchSettings(),
+    throwOnError: true,
   });
   const saveFn = useServerFn(saveSettings);
 

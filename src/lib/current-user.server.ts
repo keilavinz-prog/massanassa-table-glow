@@ -50,12 +50,22 @@ export async function resolveCurrentUser(): Promise<CurrentUser | null> {
   };
 }
 
+/** Error de sesión/permisos con código HTTP para no romper el render con un 500. */
+export class AuthError extends Error {
+  statusCode: number;
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.name = "AuthError";
+    this.statusCode = statusCode;
+  }
+}
+
 /** Exige rol admin verificado en servidor; lanza si no lo es. */
 export async function requireAdminUser(): Promise<CurrentUser> {
   const user = await resolveCurrentUser();
-  if (!user) throw new Error("No hay sesión activa.");
+  if (!user) throw new AuthError("Sesión caducada. Vuelve a iniciar sesión.", 401);
   if (user.role !== "admin") {
-    throw new Error("Acceso denegado: se requiere rol de administrador.");
+    throw new AuthError("Acceso denegado: se requiere rol de administrador.", 403);
   }
   return user;
 }
