@@ -6,6 +6,7 @@ import {
   uploadInputSchema,
   MAX_IMAGE_BYTES,
 } from "./admin-schemas";
+import { landingContentSchema } from "./landing-content";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 
