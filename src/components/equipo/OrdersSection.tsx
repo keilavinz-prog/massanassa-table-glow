@@ -203,7 +203,7 @@ export function OrdersSection() {
 }
 
 /** Tarjeta de resumen: pedidos activos hoy (pending+paid+preparing+ready). */
-export function ActiveOrdersCard() {
+export function ActiveOrdersCard({ onSelect }: { onSelect?: () => void } = {}) {
   const queryClient = useQueryClient();
   const fetchOrders = useServerFn(getOrdersByDate);
   const today = todayISO();
@@ -218,12 +218,27 @@ export function ActiveOrdersCard() {
   }, [queryClient]);
   useRealtimeTables(["orders"], invalidate);
 
-  return (
-    <div className="flex items-center gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm">
+  const inner = (
+    <>
       <span className="flex size-11 items-center justify-center rounded-full bg-primary font-display text-h3 text-primary-foreground">
         {data?.activeToday ?? 0}
       </span>
       <p className="text-small text-muted-foreground">pedidos activos hoy</p>
-    </div>
+    </>
+  );
+
+  const base =
+    "flex w-full items-center gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm";
+
+  if (!onSelect) return <div className={base}>{inner}</div>;
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={`transition-warm ${base} text-left hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-warm-lg`}
+    >
+      {inner}
+    </button>
   );
 }

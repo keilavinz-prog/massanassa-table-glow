@@ -46,6 +46,7 @@ const inputClass =
 export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode }) {
   const [date, setDate] = useState<string>(todayISO());
   const [mode, setMode] = useState<"upcoming" | "day">("upcoming");
+  const [statusFilter, setStatusFilter] = useState<ReservationStatus | null>(null);
   const [editing, setEditing] = useState<Reservation | null>(null);
   const queryClient = useQueryClient();
 
@@ -99,13 +100,13 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const reservations = data?.reservations ?? [];
+  const allReservations = data?.reservations ?? [];
+  const reservations = statusFilter
+    ? allReservations.filter((r) => r.status === statusFilter)
+    : allReservations;
   const confirmedToday = useMemo(
-    () =>
-      date === todayISO()
-        ? reservations.filter((r) => r.status === "confirmed").length
-        : reservations.filter((r) => r.status === "confirmed").length,
-    [reservations, date],
+    () => allReservations.filter((r) => r.status === "confirmed").length,
+    [allReservations],
   );
 
   const busy = confirmMut.isPending || rejectMut.isPending || cancelMut.isPending;
@@ -117,11 +118,30 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
           value={data?.pendingTotal ?? 0}
           label="reservas pendientes"
           badgeClass="bg-gold text-dark-brown"
+          active={statusFilter === "pending"}
+          onClick={() => {
+            if (statusFilter === "pending") {
+              setStatusFilter(null);
+              return;
+            }
+            setStatusFilter("pending");
+            setMode("upcoming");
+            setDate(todayISO());
+          }}
         />
         <SummaryCard
           value={confirmedToday}
           label={date === todayISO() ? "confirmadas para hoy" : "confirmadas ese día"}
           badgeClass="bg-olive text-white"
+          active={statusFilter === "confirmed"}
+          onClick={() => {
+            if (statusFilter === "confirmed") {
+              setStatusFilter(null);
+              return;
+            }
+            setStatusFilter("confirmed");
+            setMode("day");
+          }}
         />
         {extraSummary}
       </div>
@@ -167,6 +187,15 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
           <CalendarDays className="size-4 text-gold" />
           {mode === "upcoming" ? `Desde ${formatLongDate(date)}` : formatLongDate(date)}
         </p>
+        {statusFilter && (
+          <button
+            type="button"
+            onClick={() => setStatusFilter(null)}
+            className="transition-warm mb-1 inline-flex items-center gap-2 rounded-full border border-input px-3 py-1 text-small hover:bg-accent/20"
+          >
+            Filtro: {statusLabel[statusFilter]} <X className="size-3.5" />
+          </button>
+        )}
       </div>
 
       {isLoading && (
@@ -304,20 +333,43 @@ function SummaryCard({
   value,
   label,
   badgeClass,
+  onClick,
+  active = false,
 }: {
   value: number;
   label: string;
   badgeClass: string;
+  onClick?: () => void;
+  active?: boolean;
 }) {
-  return (
-    <div className="flex items-center gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm">
+  const content = (
+    <>
       <span
         className={`flex size-11 items-center justify-center rounded-full font-display text-h3 ${badgeClass}`}
       >
         {value}
       </span>
       <p className="text-small text-muted-foreground">{label}</p>
-    </div>
+    </>
+  );
+
+  const base = "flex w-full items-center gap-4 rounded-md border bg-card p-4 shadow-warm";
+
+  if (!onClick) {
+    return <div className={`${base} border-border/70`}>{content}</div>;
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`transition-warm ${base} text-left hover:-translate-y-0.5 hover:shadow-warm-lg ${
+        active ? "border-terracota ring-2 ring-primary/25" : "border-border/70"
+      }`}
+    >
+      {content}
+    </button>
   );
 }
 

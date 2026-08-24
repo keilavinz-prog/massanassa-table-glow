@@ -60,7 +60,9 @@ function EquipoPage() {
       </nav>
 
       {tab === "reservas" ? (
-        <ReservationsSection extraSummary={<ActiveOrdersCard />} />
+        <ReservationsSection
+          extraSummary={<ActiveOrdersCard onSelect={() => setTab("pedidos")} />}
+        />
       ) : (
         <>
           <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:max-w-xl">
