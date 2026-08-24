@@ -125,33 +125,29 @@ function Landing() {
 
         <section className="mx-auto max-w-4xl px-6 pb-16">
           <div className="rounded-lg border border-gold/60 bg-cream p-8 text-center shadow-warm">
-            <p className="eyebrow text-olive">Catering y eventos</p>
+            <p className="eyebrow text-olive">{c.catering_eyebrow}</p>
             <h2 className="mt-3 font-display text-h2 text-dark-brown">
-              Llevamos la paella a tu celebración
+              {c.catering_title}
             </h2>
-            <p className="mt-4 text-dark-brown/80">
-              Bodas, comuniones, cumpleaños y eventos de empresa con nuestros arroces en
-              paella de leña y la cocina de siempre. Preparamos una propuesta a medida según
-              fecha, número de invitados y presupuesto.
-            </p>
+            <p className="mt-4 whitespace-pre-line text-dark-brown/80">{c.catering_body}</p>
             <Link
               to="/catering"
               className="transition-warm mt-6 inline-flex rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              ¿Organizas un evento? Solicita presupuesto
+              {c.catering_cta_label}
             </Link>
           </div>
         </section>
 
         <section className="mx-auto max-w-6xl px-6 pb-16">
-          <p className="eyebrow text-olive">Nuestra carta</p>
+          <p className="eyebrow text-olive">{c.menu_eyebrow}</p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-            <h2 className="font-display text-h2">Categorías</h2>
+            <h2 className="font-display text-h2">{c.menu_title}</h2>
             <Link
               to="/carta"
               className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              Ver la carta digital
+              {c.menu_cta_label}
             </Link>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
