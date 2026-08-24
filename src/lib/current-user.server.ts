@@ -65,7 +65,7 @@ export async function requireAdminUser(): Promise<CurrentUser> {
   const user = await resolveCurrentUser();
   if (!user) throw new AuthError("Sesión caducada. Vuelve a iniciar sesión.", 401);
   if (user.role !== "admin") {
-    throw new Error("Acceso denegado: se requiere rol de administrador.");
+    throw new AuthError("Acceso denegado: se requiere rol de administrador.", 403);
   }
   return user;
 }
