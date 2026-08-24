@@ -45,15 +45,16 @@ const inputClass =
 
 export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode }) {
   const [date, setDate] = useState<string>(todayISO());
+  const [mode, setMode] = useState<"upcoming" | "day">("upcoming");
   const [editing, setEditing] = useState<Reservation | null>(null);
   const queryClient = useQueryClient();
 
   const fetchByDate = useServerFn(getReservationsByDate);
-  const queryKey = ["reservations", date] as const;
+  const queryKey = ["reservations", mode, date] as const;
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey,
-    queryFn: () => fetchByDate({ data: { date } }),
+    queryFn: () => fetchByDate({ data: { date, mode } }),
   });
 
   const confirmFn = useServerFn(confirmReservation);
@@ -127,8 +128,32 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
 
       <div className="flex flex-wrap items-end gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm">
         <div>
+          <span className="block text-small font-medium">Vista</span>
+          <div className="mt-1 flex gap-2">
+            {(
+              [
+                { id: "upcoming", label: "Próximas" },
+                { id: "day", label: "Por día" },
+              ] as const
+            ).map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                onClick={() => setMode(m.id)}
+                className={`transition-warm rounded-md px-4 py-2 text-small font-medium ${
+                  mode === m.id
+                    ? "bg-terracota text-white shadow-warm"
+                    : "border border-input bg-background hover:bg-accent/20"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
           <label className="block text-small font-medium" htmlFor="filter-date">
-            Día
+            {mode === "upcoming" ? "Desde el día" : "Día"}
           </label>
           <input
             id="filter-date"
@@ -140,7 +165,7 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
         </div>
         <p className="flex items-center gap-2 pb-2 text-small text-muted-foreground">
           <CalendarDays className="size-4 text-gold" />
-          {formatLongDate(date)}
+          {mode === "upcoming" ? `Desde ${formatLongDate(date)}` : formatLongDate(date)}
         </p>
       </div>
 
@@ -164,7 +189,9 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
 
       {!isLoading && !isError && reservations.length === 0 && (
         <p className="rounded-md border border-dashed border-border bg-card/60 p-8 text-center text-muted-foreground">
-          No hay reservas para este día.
+          {mode === "upcoming"
+            ? "No hay reservas próximas."
+            : "No hay reservas para este día."}
         </p>
       )}
 
@@ -184,6 +211,9 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
                   <h3 className="font-display text-h3 text-dark-brown">
                     {normalizeTime(r.reservation_time)}
                   </h3>
+                  <p className="text-small text-muted-foreground">
+                    {formatLongDate(r.reservation_date)}
+                  </p>
                   <p className="mt-1 font-medium">{r.customer_name}</p>
                   <p className="mt-1 flex items-center gap-2 text-small text-muted-foreground">
                     <Phone className="size-4" /> {r.customer_phone}

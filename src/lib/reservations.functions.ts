@@ -9,7 +9,10 @@ import type { Database } from "@/integrations/supabase/types";
 export type Reservation = Database["public"]["Tables"]["reservations"]["Row"];
 
 const idSchema = z.object({ id: z.string().uuid() });
-const dateSchema = z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) });
+const dateSchema = z.object({
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  mode: z.enum(["day", "upcoming"]).optional().default("day"),
+});
 
 /** Reserva pública: sin sesión, pero con validación completa en servidor. */
 export const createPublicReservation = createServerFn({ method: "POST" })
@@ -55,12 +58,23 @@ export const getReservationsByDate = createServerFn({ method: "GET" })
     const { getAdminClient } = await import("./admin.server");
     const supabase = getAdminClient();
 
+    const listQuery =
+      data.mode === "upcoming"
+        ? supabase
+            .from("reservations")
+            .select("*")
+            .gte("reservation_date", data.date)
+            .order("reservation_date", { ascending: true })
+            .order("reservation_time", { ascending: true })
+            .limit(200)
+        : supabase
+            .from("reservations")
+            .select("*")
+            .eq("reservation_date", data.date)
+            .order("reservation_time", { ascending: true });
+
     const [dayRes, pendingRes] = await Promise.all([
-      supabase
-        .from("reservations")
-        .select("*")
-        .eq("reservation_date", data.date)
-        .order("reservation_time", { ascending: true }),
+      listQuery,
       supabase.from("reservations").select("id").eq("status", "pending"),
     ]);
 
