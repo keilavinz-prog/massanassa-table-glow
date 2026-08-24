@@ -46,6 +46,7 @@ const inputClass =
 export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode }) {
   const [date, setDate] = useState<string>(todayISO());
   const [mode, setMode] = useState<"upcoming" | "day">("upcoming");
+  const [statusFilter, setStatusFilter] = useState<ReservationStatus | null>(null);
   const [editing, setEditing] = useState<Reservation | null>(null);
   const queryClient = useQueryClient();
 
