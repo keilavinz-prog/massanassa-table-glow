@@ -64,12 +64,14 @@ function Landing() {
               to="/reservar"
               className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              Reservar mesa
+              {c.header_cta_label}
             </Link>
           <div className="text-right text-small text-muted-foreground">
-            <p className="eyebrow text-accent-foreground/70">Horario</p>
-            <p>Martes a domingo · {hoursSummary}</p>
-            <p>Lunes cerrado</p>
+            <p className="eyebrow text-accent-foreground/70">{c.hours_label}</p>
+            <p>
+              {c.hours_prefix} · {hoursSummary}
+            </p>
+            <p>{c.closed_note}</p>
           </div>
           </div>
         </div>
