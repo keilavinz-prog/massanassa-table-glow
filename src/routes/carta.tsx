@@ -104,7 +104,6 @@ function CartaPage() {
   }
 
   function scrollTo(id: string) {
-
     setActiveCategory(id);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.getElementById(`cat-${id}`)?.scrollIntoView({
