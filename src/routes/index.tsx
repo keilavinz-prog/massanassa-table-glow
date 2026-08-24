@@ -81,7 +81,7 @@ function Landing() {
         <section className="relative overflow-hidden">
           <img
             src={s?.hero_image_url ?? ""}
-            alt="Arroz valenciano recién hecho en paella"
+            alt={c.hero_image_alt}
             className="h-[520px] w-full object-cover"
           />
           <div className="absolute inset-0 bg-dark-brown/55" />
