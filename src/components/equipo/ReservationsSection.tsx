@@ -45,15 +45,16 @@ const inputClass =
 
 export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode }) {
   const [date, setDate] = useState<string>(todayISO());
+  const [mode, setMode] = useState<"upcoming" | "day">("upcoming");
   const [editing, setEditing] = useState<Reservation | null>(null);
   const queryClient = useQueryClient();
 
   const fetchByDate = useServerFn(getReservationsByDate);
-  const queryKey = ["reservations", date] as const;
+  const queryKey = ["reservations", mode, date] as const;
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey,
-    queryFn: () => fetchByDate({ data: { date } }),
+    queryFn: () => fetchByDate({ data: { date, mode } }),
   });
 
   const confirmFn = useServerFn(confirmReservation);
