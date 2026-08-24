@@ -128,8 +128,32 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
 
       <div className="flex flex-wrap items-end gap-4 rounded-md border border-border/70 bg-card p-4 shadow-warm">
         <div>
+          <span className="block text-small font-medium">Vista</span>
+          <div className="mt-1 flex gap-2">
+            {(
+              [
+                { id: "upcoming", label: "Próximas" },
+                { id: "day", label: "Por día" },
+              ] as const
+            ).map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                onClick={() => setMode(m.id)}
+                className={`transition-warm rounded-md px-4 py-2 text-small font-medium ${
+                  mode === m.id
+                    ? "bg-terracota text-white shadow-warm"
+                    : "border border-input bg-background hover:bg-accent/20"
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
           <label className="block text-small font-medium" htmlFor="filter-date">
-            Día
+            {mode === "upcoming" ? "Desde el día" : "Día"}
           </label>
           <input
             id="filter-date"
@@ -141,7 +165,7 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
         </div>
         <p className="flex items-center gap-2 pb-2 text-small text-muted-foreground">
           <CalendarDays className="size-4 text-gold" />
-          {formatLongDate(date)}
+          {mode === "upcoming" ? `Desde ${formatLongDate(date)}` : formatLongDate(date)}
         </p>
       </div>
 
