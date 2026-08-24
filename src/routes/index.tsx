@@ -5,6 +5,7 @@ import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { LocationMap } from "@/components/LocationMap";
+import { resolveLandingContent } from "@/lib/landing-content";
 
 
 const landingQuery = queryOptions({
@@ -13,28 +14,23 @@ const landingQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => {
-    context.queryClient.ensureQueryData(landingQuery);
+  loader: async ({ context }) => {
+    const data = await context.queryClient.ensureQueryData(landingQuery);
+    return { content: resolveLandingContent(data.settings?.landing_content) };
   },
-  head: () => ({
-    meta: [
-      { title: "El Fogó de Massanassa — Cocina valenciana de mercado" },
-      {
-        name: "description",
-        content:
-          "Taberna valenciana en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.",
-      },
-      {
-        property: "og:title",
-        content: "El Fogó de Massanassa — Cocina valenciana de mercado",
-      },
-      {
-        property: "og:description",
-        content:
-          "Arroces en paella de leña, esgarraet, pollo asado para llevar y postres caseros en Massanassa (Valencia).",
-      },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const content = loaderData?.content ?? resolveLandingContent(null);
+    return {
+      meta: [
+        { title: content.seo_title },
+        { name: "description", content: content.seo_description },
+        { property: "og:title", content: content.seo_title },
+        { property: "og:description", content: content.seo_description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: Landing,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-8 text-center">
