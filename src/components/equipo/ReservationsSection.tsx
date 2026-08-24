@@ -187,6 +187,15 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
           <CalendarDays className="size-4 text-gold" />
           {mode === "upcoming" ? `Desde ${formatLongDate(date)}` : formatLongDate(date)}
         </p>
+        {statusFilter && (
+          <button
+            type="button"
+            onClick={() => setStatusFilter(null)}
+            className="transition-warm mb-1 inline-flex items-center gap-2 rounded-full border border-input px-3 py-1 text-small hover:bg-accent/20"
+          >
+            Filtro: {statusLabel[statusFilter]} <X className="size-3.5" />
+          </button>
+        )}
       </div>
 
       {isLoading && (
