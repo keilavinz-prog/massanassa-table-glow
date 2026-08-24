@@ -28,9 +28,11 @@ export const Route = createFileRoute("/admin")({
 
 const TABS = [
   { id: "carta", label: "Carta" },
+  { id: "landing", label: "Portada" },
   { id: "restaurante", label: "Restaurante" },
   { id: "qr", label: "Código QR" },
   { id: "catering", label: "Catering" },
+  { id: "usuarios", label: "Usuarios" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
