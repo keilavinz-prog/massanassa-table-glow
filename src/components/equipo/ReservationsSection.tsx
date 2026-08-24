@@ -100,13 +100,13 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const reservations = data?.reservations ?? [];
+  const allReservations = data?.reservations ?? [];
+  const reservations = statusFilter
+    ? allReservations.filter((r) => r.status === statusFilter)
+    : allReservations;
   const confirmedToday = useMemo(
-    () =>
-      date === todayISO()
-        ? reservations.filter((r) => r.status === "confirmed").length
-        : reservations.filter((r) => r.status === "confirmed").length,
-    [reservations, date],
+    () => allReservations.filter((r) => r.status === "confirmed").length,
+    [allReservations],
   );
 
   const busy = confirmMut.isPending || rejectMut.isPending || cancelMut.isPending;
