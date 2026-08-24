@@ -67,9 +67,11 @@ function AdminPage() {
 
         <div className="mt-8">
           {tab === "carta" && <CartaSection />}
+          {tab === "landing" && <LandingSection />}
           {tab === "restaurante" && <RestauranteSection />}
           {tab === "qr" && <QrSection />}
           {tab === "catering" && <CateringSection />}
+          {tab === "usuarios" && <UsuariosSection />}
         </div>
       </main>
     </div>
