@@ -9,7 +9,10 @@ import type { Database } from "@/integrations/supabase/types";
 export type Reservation = Database["public"]["Tables"]["reservations"]["Row"];
 
 const idSchema = z.object({ id: z.string().uuid() });
-const dateSchema = z.object({ date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/) });
+const dateSchema = z.object({
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  mode: z.enum(["day", "upcoming"]).optional().default("day"),
+});
 
 /** Reserva pública: sin sesión, pero con validación completa en servidor. */
 export const createPublicReservation = createServerFn({ method: "POST" })
