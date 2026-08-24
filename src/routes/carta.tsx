@@ -71,6 +71,20 @@ function CartaPage() {
     saveMenuCache({ settings: data.settings, categories: data.categories });
   }, [data]);
 
+  // Si se llega con #cat-<id> (desde la portada), desplaza a esa categoría.
+  useEffect(() => {
+    const hash = window.location.hash.replace(/^#/, "");
+    if (!hash.startsWith("cat-")) return;
+    const id = hash.slice(4);
+    const el = document.getElementById(hash);
+    if (!el) return;
+    setActiveCategory(id);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    requestAnimationFrame(() =>
+      el.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }),
+    );
+  }, [data]);
+
   const categories = useMemo(
     () =>
       data.categories.map((c) => ({
