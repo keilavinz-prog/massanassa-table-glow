@@ -189,7 +189,9 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
 
       {!isLoading && !isError && reservations.length === 0 && (
         <p className="rounded-md border border-dashed border-border bg-card/60 p-8 text-center text-muted-foreground">
-          No hay reservas para este día.
+          {mode === "upcoming"
+            ? "No hay reservas próximas."
+            : "No hay reservas para este día."}
         </p>
       )}
 
