@@ -263,6 +263,7 @@ export type Database = {
           hero_image_url: string | null
           id: number
           instagram_url: string | null
+          landing_content: Json
           lat: number | null
           lng: number | null
           logo_url: string | null
@@ -284,6 +285,7 @@ export type Database = {
           hero_image_url?: string | null
           id?: number
           instagram_url?: string | null
+          landing_content?: Json
           lat?: number | null
           lng?: number | null
           logo_url?: string | null
@@ -305,6 +307,7 @@ export type Database = {
           hero_image_url?: string | null
           id?: number
           instagram_url?: string | null
+          landing_content?: Json
           lat?: number | null
           lng?: number | null
           logo_url?: string | null

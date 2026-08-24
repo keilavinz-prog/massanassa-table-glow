@@ -6,6 +6,8 @@ import { CartaSection } from "@/components/admin/CartaSection";
 import { RestauranteSection } from "@/components/admin/RestauranteSection";
 import { QrSection } from "@/components/admin/QrSection";
 import { CateringSection } from "@/components/admin/CateringSection";
+import { LandingSection } from "@/components/admin/LandingSection";
+import { UsuariosSection } from "@/components/admin/UsuariosSection";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
@@ -26,9 +28,11 @@ export const Route = createFileRoute("/admin")({
 
 const TABS = [
   { id: "carta", label: "Carta" },
+  { id: "landing", label: "Portada" },
   { id: "restaurante", label: "Restaurante" },
   { id: "qr", label: "Código QR" },
   { id: "catering", label: "Catering" },
+  { id: "usuarios", label: "Usuarios" },
 ] as const;
 
 type TabId = (typeof TABS)[number]["id"];
@@ -63,9 +67,11 @@ function AdminPage() {
 
         <div className="mt-8">
           {tab === "carta" && <CartaSection />}
+          {tab === "landing" && <LandingSection />}
           {tab === "restaurante" && <RestauranteSection />}
           {tab === "qr" && <QrSection />}
           {tab === "catering" && <CateringSection />}
+          {tab === "usuarios" && <UsuariosSection />}
         </div>
       </main>
     </div>

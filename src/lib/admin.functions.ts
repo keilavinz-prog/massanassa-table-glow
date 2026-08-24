@@ -6,6 +6,7 @@ import {
   uploadInputSchema,
   MAX_IMAGE_BYTES,
 } from "./admin-schemas";
+import { landingContentSchema } from "./landing-content";
 import { z } from "zod";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -175,6 +176,22 @@ export const saveSettings = createServerFn({ method: "POST" })
         facebook_url: data.facebook_url || null,
         updated_at: new Date().toISOString(),
       })
+      .eq("id", 1);
+    if (error) throw error;
+    return { ok: true };
+  });
+
+/** Guarda los textos editables de la landing. Solo admin. */
+export const saveLandingContent = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => landingContentSchema.parse(data))
+  .handler(async ({ data }) => {
+    const { requireAdminUser } = await import("./current-user.server");
+    const { getAdminClient } = await import("./admin.server");
+    await requireAdminUser();
+    const supabase = getAdminClient();
+    const { error } = await supabase
+      .from("restaurant_settings")
+      .update({ landing_content: data, updated_at: new Date().toISOString() })
       .eq("id", 1);
     if (error) throw error;
     return { ok: true };

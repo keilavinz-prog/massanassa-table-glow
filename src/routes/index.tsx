@@ -5,6 +5,7 @@ import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { LocationMap } from "@/components/LocationMap";
+import { resolveLandingContent } from "@/lib/landing-content";
 
 
 const landingQuery = queryOptions({
@@ -13,28 +14,23 @@ const landingQuery = queryOptions({
 });
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => {
-    context.queryClient.ensureQueryData(landingQuery);
+  loader: async ({ context }) => {
+    const data = await context.queryClient.ensureQueryData(landingQuery);
+    return { content: resolveLandingContent(data.settings?.landing_content) };
   },
-  head: () => ({
-    meta: [
-      { title: "El Fogó de Massanassa — Cocina valenciana de mercado" },
-      {
-        name: "description",
-        content:
-          "Taberna valenciana en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.",
-      },
-      {
-        property: "og:title",
-        content: "El Fogó de Massanassa — Cocina valenciana de mercado",
-      },
-      {
-        property: "og:description",
-        content:
-          "Arroces en paella de leña, esgarraet, pollo asado para llevar y postres caseros en Massanassa (Valencia).",
-      },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const content = loaderData?.content ?? resolveLandingContent(null);
+    return {
+      meta: [
+        { title: content.seo_title },
+        { name: "description", content: content.seo_description },
+        { property: "og:title", content: content.seo_title },
+        { property: "og:description", content: content.seo_description },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+    };
+  },
   component: Landing,
   errorComponent: ({ error }) => (
     <div role="alert" className="p-8 text-center">
@@ -49,6 +45,7 @@ function Landing() {
   const s = data.settings;
   const hours = (s?.opening_hours ?? {}) as Record<string, string>;
   const hoursSummary = hours["mar_dom"] ?? Object.values(hours).join(" · ");
+  const c = resolveLandingContent(s?.landing_content);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -67,12 +64,14 @@ function Landing() {
               to="/reservar"
               className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              Reservar mesa
+              {c.header_cta_label}
             </Link>
           <div className="text-right text-small text-muted-foreground">
-            <p className="eyebrow text-accent-foreground/70">Horario</p>
-            <p>Martes a domingo · {hoursSummary}</p>
-            <p>Lunes cerrado</p>
+            <p className="eyebrow text-accent-foreground/70">{c.hours_label}</p>
+            <p>
+              {c.hours_prefix} · {hoursSummary}
+            </p>
+            <p>{c.closed_note}</p>
           </div>
           </div>
         </div>
@@ -82,7 +81,7 @@ function Landing() {
         <section className="relative overflow-hidden">
           <img
             src={s?.hero_image_url ?? ""}
-            alt="Arroz valenciano recién hecho en paella"
+            alt={c.hero_image_alt}
             className="h-[520px] w-full object-cover"
           />
           <div className="absolute inset-0 bg-dark-brown/55" />
@@ -91,7 +90,7 @@ function Landing() {
               {s?.city} · {s?.postal_code}
             </p>
             <h1 className="mt-3 max-w-2xl font-display text-h1 text-cream">
-              Cocina valenciana de mercado en Massanassa
+              {c.hero_title}
             </h1>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -108,14 +107,14 @@ function Landing() {
         </section>
 
         <section className="mx-auto max-w-3xl px-6 py-16 text-center">
-          <p className="eyebrow text-olive">Sobre nosotros</p>
-          <h2 className="mt-3 font-display text-h2">La taberna del barrio</h2>
+          <p className="eyebrow text-olive">{c.about_eyebrow}</p>
+          <h2 className="mt-3 font-display text-h2">{c.about_title}</h2>
           <p className="mt-4 text-muted-foreground">{s?.description}</p>
         </section>
 
         <section className="mx-auto max-w-4xl px-6 pb-16">
-          <p className="eyebrow text-olive">Cómo llegar</p>
-          <h2 className="mt-3 font-display text-h2">Dónde estamos</h2>
+          <p className="eyebrow text-olive">{c.location_eyebrow}</p>
+          <h2 className="mt-3 font-display text-h2">{c.location_title}</h2>
           <p className="mt-4 text-muted-foreground">
             {s?.address}, {s?.postal_code} {s?.city}
           </p>
@@ -126,33 +125,29 @@ function Landing() {
 
         <section className="mx-auto max-w-4xl px-6 pb-16">
           <div className="rounded-lg border border-gold/60 bg-cream p-8 text-center shadow-warm">
-            <p className="eyebrow text-olive">Catering y eventos</p>
+            <p className="eyebrow text-olive">{c.catering_eyebrow}</p>
             <h2 className="mt-3 font-display text-h2 text-dark-brown">
-              Llevamos la paella a tu celebración
+              {c.catering_title}
             </h2>
-            <p className="mt-4 text-dark-brown/80">
-              Bodas, comuniones, cumpleaños y eventos de empresa con nuestros arroces en
-              paella de leña y la cocina de siempre. Preparamos una propuesta a medida según
-              fecha, número de invitados y presupuesto.
-            </p>
+            <p className="mt-4 whitespace-pre-line text-dark-brown/80">{c.catering_body}</p>
             <Link
               to="/catering"
               className="transition-warm mt-6 inline-flex rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              ¿Organizas un evento? Solicita presupuesto
+              {c.catering_cta_label}
             </Link>
           </div>
         </section>
 
         <section className="mx-auto max-w-6xl px-6 pb-16">
-          <p className="eyebrow text-olive">Nuestra carta</p>
+          <p className="eyebrow text-olive">{c.menu_eyebrow}</p>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-            <h2 className="font-display text-h2">Categorías</h2>
+            <h2 className="font-display text-h2">{c.menu_title}</h2>
             <Link
               to="/carta"
               className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 font-medium text-primary-foreground shadow-warm hover:brightness-110"
             >
-              Ver la carta digital
+              {c.menu_cta_label}
             </Link>
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
