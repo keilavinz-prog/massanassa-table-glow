@@ -117,11 +117,30 @@ export function ReservationsSection({ extraSummary }: { extraSummary?: ReactNode
           value={data?.pendingTotal ?? 0}
           label="reservas pendientes"
           badgeClass="bg-gold text-dark-brown"
+          active={statusFilter === "pending"}
+          onClick={() => {
+            if (statusFilter === "pending") {
+              setStatusFilter(null);
+              return;
+            }
+            setStatusFilter("pending");
+            setMode("upcoming");
+            setDate(todayISO());
+          }}
         />
         <SummaryCard
           value={confirmedToday}
           label={date === todayISO() ? "confirmadas para hoy" : "confirmadas ese día"}
           badgeClass="bg-olive text-white"
+          active={statusFilter === "confirmed"}
+          onClick={() => {
+            if (statusFilter === "confirmed") {
+              setStatusFilter(null);
+              return;
+            }
+            setStatusFilter("confirmed");
+            setMode("day");
+          }}
         />
         {extraSummary}
       </div>
