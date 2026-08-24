@@ -45,6 +45,7 @@ function Landing() {
   const s = data.settings;
   const hours = (s?.opening_hours ?? {}) as Record<string, string>;
   const hoursSummary = hours["mar_dom"] ?? Object.values(hours).join(" · ");
+  const c = resolveLandingContent(s?.landing_content);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
