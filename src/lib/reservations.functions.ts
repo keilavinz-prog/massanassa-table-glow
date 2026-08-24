@@ -58,12 +58,23 @@ export const getReservationsByDate = createServerFn({ method: "GET" })
     const { getAdminClient } = await import("./admin.server");
     const supabase = getAdminClient();
 
+    const listQuery =
+      data.mode === "upcoming"
+        ? supabase
+            .from("reservations")
+            .select("*")
+            .gte("reservation_date", data.date)
+            .order("reservation_date", { ascending: true })
+            .order("reservation_time", { ascending: true })
+            .limit(200)
+        : supabase
+            .from("reservations")
+            .select("*")
+            .eq("reservation_date", data.date)
+            .order("reservation_time", { ascending: true });
+
     const [dayRes, pendingRes] = await Promise.all([
-      supabase
-        .from("reservations")
-        .select("*")
-        .eq("reservation_date", data.date)
-        .order("reservation_time", { ascending: true }),
+      listQuery,
       supabase.from("reservations").select("id").eq("status", "pending"),
     ]);
 
