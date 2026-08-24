@@ -152,16 +152,19 @@ function Landing() {
           </div>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.categories.map((c) => (
-              <article
+              <Link
                 key={c.id}
-                className="transition-warm group rounded-lg border border-border bg-card p-6 shadow-warm hover:-translate-y-1 hover:shadow-warm-lg"
+                to="/carta"
+                hash={`cat-${c.id}`}
+                aria-label={`Ver ${c.name} en la carta`}
+                className="transition-warm group block rounded-lg border border-border bg-card p-6 shadow-warm hover:-translate-y-1 hover:border-primary/60 hover:shadow-warm-lg"
               >
-                <h3 className="font-display text-h3">{c.name}</h3>
+                <h3 className="font-display text-h3 group-hover:text-primary">{c.name}</h3>
                 <p className="mt-2 text-small text-muted-foreground">
                   {c.available_dishes}{" "}
                   {c.available_dishes === 1 ? "plato disponible" : "platos disponibles"}
                 </p>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
