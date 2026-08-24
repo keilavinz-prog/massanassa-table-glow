@@ -6,6 +6,8 @@ import { CartaSection } from "@/components/admin/CartaSection";
 import { RestauranteSection } from "@/components/admin/RestauranteSection";
 import { QrSection } from "@/components/admin/QrSection";
 import { CateringSection } from "@/components/admin/CateringSection";
+import { LandingSection } from "@/components/admin/LandingSection";
+import { UsuariosSection } from "@/components/admin/UsuariosSection";
 
 export const Route = createFileRoute("/admin")({
   ssr: false,
