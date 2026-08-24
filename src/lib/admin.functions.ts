@@ -180,6 +180,22 @@ export const saveSettings = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+/** Guarda los textos editables de la landing. Solo admin. */
+export const saveLandingContent = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) => landingContentSchema.parse(data))
+  .handler(async ({ data }) => {
+    const { requireAdminUser } = await import("./current-user.server");
+    const { getAdminClient } = await import("./admin.server");
+    await requireAdminUser();
+    const supabase = getAdminClient();
+    const { error } = await supabase
+      .from("restaurant_settings")
+      .update({ landing_content: data, updated_at: new Date().toISOString() })
+      .eq("id", 1);
+    if (error) throw error;
+    return { ok: true };
+  });
+
 /** Sube una imagen. Valida rol admin en servidor ANTES de aceptar el archivo. */
 export const uploadImage = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => uploadInputSchema.parse(data))
