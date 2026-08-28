@@ -128,12 +128,12 @@ function CartaPage() {
                 <UtensilsCrossed className="size-5" />
               </span>
             )}
-            <span className="truncate font-display text-h3 font-semibold leading-none">{s?.name}</span>
+            <span className="w-full truncate font-display text-lg font-semibold leading-none sm:text-h3">{s?.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <Link
               to="/"
-              className="transition-warm inline-flex items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary"
+              className="transition-warm hidden items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary sm:inline-flex"
             >
               <ArrowLeft className="size-4" /> Volver al inicio
             </Link>
