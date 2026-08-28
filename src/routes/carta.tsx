@@ -115,25 +115,25 @@ function CartaPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="safe-pt safe-px sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-6 py-3 sm:flex sm:flex-wrap sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
             {s?.logo_url ? (
               <img
                 src={s.logo_url}
                 alt={s?.name ?? "Logo"}
-                className="size-10 rounded-full object-cover"
+                className="size-10 shrink-0 rounded-full object-cover"
               />
             ) : (
-              <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 <UtensilsCrossed className="size-5" />
               </span>
             )}
-            <span className="font-display text-h3 font-semibold leading-none">{s?.name}</span>
+            <span className="w-full truncate font-display text-lg font-semibold leading-none sm:text-h3">{s?.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <Link
               to="/"
-              className="transition-warm inline-flex items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary"
+              className="transition-warm hidden items-center gap-2 rounded-sm px-3 py-2 text-small text-muted-foreground hover:text-primary sm:inline-flex"
             >
               <ArrowLeft className="size-4" /> Volver al inicio
             </Link>
@@ -147,8 +147,8 @@ function CartaPage() {
         </div>
 
         <div className="safe-px border-t border-border/60">
-          <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-2">
-            <div className="flex flex-1 gap-2 overflow-x-auto pb-1">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-2 sm:flex-row sm:items-center sm:gap-3">
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:flex-1 sm:flex-wrap sm:gap-2">
               {categories.map((c) => (
                 <button
                   key={c.id}
@@ -156,7 +156,7 @@ function CartaPage() {
                   onClick={() => scrollTo(c.id)}
                   disabled={c.dishes.length === 0}
                   title={c.name}
-                  className={`tap-target transition-warm shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-center text-xs leading-tight sm:px-4 sm:text-small ${
+                  className={`tap-target transition-warm rounded-full border px-3 py-1.5 text-center text-xs leading-tight sm:px-4 sm:text-small ${
                     activeCategory === c.id
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-card hover:border-gold"
@@ -169,7 +169,7 @@ function CartaPage() {
             <button
               type="button"
               onClick={() => setFiltersOpen(true)}
-              className="tap-target transition-warm inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10"
+              className="tap-target transition-warm inline-flex w-full items-center justify-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10 sm:w-auto"
             >
               <SlidersHorizontal className="size-4" /> Filtrar alérgenos
               {active.length > 0 && (
