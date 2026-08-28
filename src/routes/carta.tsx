@@ -148,7 +148,7 @@ function CartaPage() {
 
         <div className="safe-px border-t border-border/60">
           <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-2">
-            <div className="flex flex-1 gap-2 overflow-x-auto pb-1">
+            <div className="grid w-full flex-1 grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2">
               {categories.map((c) => (
                 <button
                   key={c.id}
@@ -156,7 +156,7 @@ function CartaPage() {
                   onClick={() => scrollTo(c.id)}
                   disabled={c.dishes.length === 0}
                   title={c.name}
-                  className={`tap-target transition-warm shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-center text-xs leading-tight sm:px-4 sm:text-small ${
+                  className={`tap-target transition-warm rounded-full border px-3 py-1.5 text-center text-xs leading-tight sm:px-4 sm:text-small ${
                     activeCategory === c.id
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-card hover:border-gold"
