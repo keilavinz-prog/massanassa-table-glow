@@ -230,7 +230,7 @@ function CartaPage() {
           </div>
         ) : (
           visibleCategories.map((c, ci) => (
-            <section key={c.id} id={`cat-${c.id}`} className="scroll-mt-36 pt-12">
+            <section key={c.id} id={`cat-${c.id}`} className="scroll-mt-24 pt-12">
               <h2 className="font-display text-h2">{c.name}</h2>
               <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {c.dishes.map((d, di) => (
