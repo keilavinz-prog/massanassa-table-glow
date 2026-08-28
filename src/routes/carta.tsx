@@ -115,20 +115,20 @@ function CartaPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="safe-pt safe-px sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
-          <div className="flex items-center gap-3">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-3">
+          <div className="flex min-w-0 items-center gap-3">
             {s?.logo_url ? (
               <img
                 src={s.logo_url}
                 alt={s?.name ?? "Logo"}
-                className="size-10 rounded-full object-cover"
+                className="size-10 shrink-0 rounded-full object-cover"
               />
             ) : (
-              <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
                 <UtensilsCrossed className="size-5" />
               </span>
             )}
-            <span className="font-display text-h3 font-semibold leading-none">{s?.name}</span>
+            <span className="truncate font-display text-h3 font-semibold leading-none">{s?.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <Link
