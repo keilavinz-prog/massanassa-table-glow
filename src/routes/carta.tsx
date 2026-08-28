@@ -244,6 +244,25 @@ function CartaPage() {
             </section>
           ))
         )}
+
+        <section className="mt-16 rounded-lg border border-border bg-cream p-6">
+          <h2 className="font-display text-h3">Alérgenos</h2>
+          <p className="mt-1 text-small text-muted-foreground">
+            Estos son los 14 alérgenos de declaración obligatoria. Usa el filtro de alérgenos para
+            ocultar los platos que los contengan.
+          </p>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {ALLERGENS.map((a) => (
+              <li
+                key={a}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gold/60 bg-background px-3 py-1 text-small text-foreground/80"
+              >
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
+                {ALLERGEN_LABELS[a] ?? a}
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
 
       {filtersOpen && (
