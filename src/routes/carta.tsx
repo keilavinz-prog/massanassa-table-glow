@@ -155,7 +155,8 @@ function CartaPage() {
                   type="button"
                   onClick={() => scrollTo(c.id)}
                   disabled={c.dishes.length === 0}
-                  className={`tap-target transition-warm rounded-full border px-4 py-1.5 text-center text-small leading-tight ${
+                  title={c.name}
+                  className={`tap-target transition-warm shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-center text-xs leading-tight sm:px-4 sm:text-small ${
                     activeCategory === c.id
                       ? "border-primary bg-primary text-primary-foreground"
                       : "border-border bg-card hover:border-gold"
