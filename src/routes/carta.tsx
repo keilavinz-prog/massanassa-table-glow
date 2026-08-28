@@ -115,7 +115,7 @@ function CartaPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="safe-pt safe-px sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-3">
+        <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-6 py-3 sm:flex sm:flex-wrap sm:justify-between">
           <div className="flex min-w-0 items-center gap-3">
             {s?.logo_url ? (
               <img
