@@ -147,8 +147,8 @@ function CartaPage() {
         </div>
 
         <div className="safe-px border-t border-border/60">
-          <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-2">
-            <div className="grid w-full flex-1 grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-2">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-2 sm:flex-row sm:items-center sm:gap-3">
+            <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:flex-1 sm:flex-wrap sm:gap-2">
               {categories.map((c) => (
                 <button
                   key={c.id}
@@ -169,7 +169,7 @@ function CartaPage() {
             <button
               type="button"
               onClick={() => setFiltersOpen(true)}
-              className="tap-target transition-warm inline-flex shrink-0 items-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10"
+              className="tap-target transition-warm inline-flex w-full items-center justify-center gap-2 rounded-full border border-gold/70 px-4 py-1.5 text-small hover:bg-gold/10 sm:w-auto"
             >
               <SlidersHorizontal className="size-4" /> Filtrar alérgenos
               {active.length > 0 && (
