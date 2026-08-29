@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Loader2, UtensilsCrossed } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { getCurrentUserWithRole, type AppRole } from "@/lib/auth.functions";
 
@@ -76,9 +77,7 @@ function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-6 py-16">
       <div className="w-full max-w-md space-y-6">
         <div className="flex flex-col items-center text-center">
-          <span className="flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <UtensilsCrossed className="size-6" />
-          </span>
+          <BrandLogo size={48} />
           <h1 className="mt-4 font-display text-h2">RESTAURANTE CHICKEN GARDEN</h1>
           <p className="text-small text-muted-foreground">Acceso al área privada</p>
         </div>

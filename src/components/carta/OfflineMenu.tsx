@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, UtensilsCrossed } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { readMenuCache } from "@/lib/menu-cache";
 import { DishCard } from "@/components/carta/DishCard";
 import { OfflineNotice } from "@/components/carta/OfflineNotice";
@@ -38,9 +39,7 @@ export function OfflineMenu({ message }: { message?: string }) {
       <header className="safe-pt safe-px sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-5" />
-            </span>
+            <BrandLogo />
             <span className="font-display text-h3 font-semibold leading-none">
               {settings?.name ?? "RESTAURANTE CHICKEN GARDEN"}
             </span>

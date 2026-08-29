@@ -3,7 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { CheckCircle2, UtensilsCrossed } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { getLandingData } from "@/lib/restaurant.functions";
 import { createCateringRequest } from "@/lib/catering.functions";
 import {
@@ -108,9 +109,7 @@ function CateringPage() {
       <header className="sticky top-0 z-20 border-b border-border/70 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-4xl items-center justify-between gap-3 px-6 py-4">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-5" />
-            </span>
+            <BrandLogo />
             <span className="font-display text-h3 font-semibold leading-none">{s?.name}</span>
           </div>
           <Link
