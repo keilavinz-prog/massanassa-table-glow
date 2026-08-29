@@ -7,9 +7,9 @@ import {
   CalendarDays,
   CheckCircle2,
   Clock,
-  UtensilsCrossed,
   Users,
 } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { es } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { createPublicReservation } from "@/lib/reservations.functions";
