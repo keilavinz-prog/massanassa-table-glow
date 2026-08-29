@@ -32,12 +32,12 @@ export const Route = createFileRoute("/catering")({
       {
         name: "description",
         content:
-          "Solicita presupuesto de catering para bodas, comuniones, cumpleaños y eventos de empresa en Massanassa.",
+          "Solicita presupuesto de catering para bodas, comuniones, cumpleaños y eventos de empresa.",
       },
       { property: "og:title", content: "Catering y eventos — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
-        content: "Arroces en paella de leña y cocina valenciana para tu celebración.",
+        content: "Pollo asado, ensaladas y tapas para tu celebración.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
