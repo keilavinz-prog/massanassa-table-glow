@@ -25,15 +25,15 @@ export const Route = createFileRoute("/login")({
 });
 
 const demoUsers: { label: string; email: string; password: string }[] = [
-  { label: "Entrar como Admin", email: "admin@restaurantechickengarden.com", password: "Admin1234!" },
+  { label: "Entrar como Admin", email: "admin@elfogodemassanassa.es", password: "Admin1234!" },
   {
     label: "Entrar como Empleado",
-    email: "empleado@restaurantechickengarden.com",
+    email: "empleado@elfogodemassanassa.es",
     password: "Empleado1234!",
   },
   {
     label: "Entrar como Proveedor",
-    email: "proveedor@restaurantechickengarden.com",
+    email: "proveedor@elfogodemassanassa.es",
     password: "Proveedor1234!",
   },
 ];
