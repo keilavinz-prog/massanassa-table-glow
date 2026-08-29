@@ -142,9 +142,8 @@ function CateringPage() {
             <p className="eyebrow text-olive">Catering y eventos</p>
             <h1 className="mt-3 font-display text-h1">Solicita tu presupuesto</h1>
             <p className="mt-4 text-muted-foreground">
-              Llevamos nuestros arroces en paella de leña y la cocina de la casa a bodas,
-              comuniones, cumpleaños y eventos de empresa. Cuéntanos tu idea y te preparamos
-              una propuesta a medida.
+              Llevamos nuestro pollo asado, ensaladas y tapas a bodas, comuniones, cumpleaños y
+              eventos de empresa. Cuéntanos tu idea y te preparamos una propuesta a medida.
             </p>
 
             <form
