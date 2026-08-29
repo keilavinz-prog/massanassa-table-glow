@@ -74,7 +74,7 @@ export function QrSection() {
       .join(" · ");
     doc.text(footer || "Massanassa (Valencia)", w / 2, h - 18, { align: "center" });
 
-    doc.save("carta-qr-el-fogo-de-massanassa.pdf");
+    doc.save("carta-qr-restaurante-chicken-garden.pdf");
     toast.success("PDF descargado");
   }
 
