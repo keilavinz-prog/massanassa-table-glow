@@ -1,4 +1,4 @@
-const LOGO_URL = "/__l5e/assets-v1/46715e6e-ecab-4d3c-96b5-e3e6c479cd8f/logo-40.png";
+const LOGO_URL = "/__l5e/assets-v1/3aeddd0c-e789-4f40-8a88-3513ba418e94/logo-40.png";
 
 export function BrandLogo({ size = 40 }: { size?: number }) {
   return (
