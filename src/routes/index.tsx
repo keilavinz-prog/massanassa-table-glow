@@ -99,9 +99,14 @@ function Landing() {
               >
                 <Phone className="size-4" /> {s?.phone}
               </a>
-              <span className="inline-flex items-center gap-2 rounded-md border border-gold/60 px-6 py-3 text-cream">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${s?.address ?? ""}, ${s?.postal_code ?? ""} ${s?.city ?? ""}`.trim())}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-warm inline-flex items-center gap-2 rounded-md border border-gold/60 px-6 py-3 text-cream hover:bg-gold/20"
+              >
                 <MapPin className="size-4" /> {s?.address}
-              </span>
+              </a>
             </div>
           </div>
         </section>
