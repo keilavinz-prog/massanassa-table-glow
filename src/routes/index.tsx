@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
-import { MapPin, Phone, UtensilsCrossed } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
@@ -52,9 +53,7 @@ function Landing() {
       <header className="sticky top-0 z-20 border-b border-border/70 bg-background/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-4">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-5" />
-            </span>
+            <BrandLogo />
             <span className="font-display text-h3 font-semibold leading-none">
               {s?.name}
             </span>

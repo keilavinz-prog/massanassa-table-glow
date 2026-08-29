@@ -7,9 +7,9 @@ import {
   CalendarDays,
   CheckCircle2,
   Clock,
-  UtensilsCrossed,
   Users,
 } from "lucide-react";
+import { BrandLogo } from "@/components/BrandLogo";
 import { es } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { createPublicReservation } from "@/lib/reservations.functions";
@@ -153,9 +153,7 @@ function ReservarPage() {
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-6 py-3">
           <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <UtensilsCrossed className="size-5" />
-            </span>
+            <BrandLogo />
             <span className="font-display text-h3 font-semibold leading-none">
               {landing.settings?.name ?? "RESTAURANTE CHICKEN GARDEN"}
             </span>
