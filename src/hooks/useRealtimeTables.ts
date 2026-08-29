@@ -13,7 +13,7 @@ export function useRealtimeTables(tables: string[], onChange: () => void) {
     const list = key.split(",").filter(Boolean);
     if (list.length === 0) return;
 
-    const channel = supabase.channel(`fogo-realtime-${key}-${Math.random().toString(36).slice(2)}`);
+    const channel = supabase.channel(`chicken-garden-realtime-${key}-${Math.random().toString(36).slice(2)}`);
     for (const table of list) {
       channel.on(
         "postgres_changes",

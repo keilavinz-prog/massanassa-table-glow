@@ -28,16 +28,16 @@ export const Route = createFileRoute("/catering")({
   },
   head: () => ({
     meta: [
-      { title: "Catering y eventos — El Fogó de Massanassa" },
+      { title: "Catering y eventos — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
-          "Solicita presupuesto de catering para bodas, comuniones, cumpleaños y eventos de empresa en Massanassa.",
+          "Solicita presupuesto de catering para bodas, comuniones, cumpleaños y eventos de empresa.",
       },
-      { property: "og:title", content: "Catering y eventos — El Fogó de Massanassa" },
+      { property: "og:title", content: "Catering y eventos — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
-        content: "Arroces en paella de leña y cocina valenciana para tu celebración.",
+        content: "Pollo asado, ensaladas y tapas para tu celebración.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -142,9 +142,8 @@ function CateringPage() {
             <p className="eyebrow text-olive">Catering y eventos</p>
             <h1 className="mt-3 font-display text-h1">Solicita tu presupuesto</h1>
             <p className="mt-4 text-muted-foreground">
-              Llevamos nuestros arroces en paella de leña y la cocina de la casa a bodas,
-              comuniones, cumpleaños y eventos de empresa. Cuéntanos tu idea y te preparamos
-              una propuesta a medida.
+              Llevamos nuestro pollo asado, ensaladas y tapas a bodas, comuniones, cumpleaños y
+              eventos de empresa. Cuéntanos tu idea y te preparamos una propuesta a medida.
             </p>
 
             <form

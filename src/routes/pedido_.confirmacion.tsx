@@ -12,13 +12,13 @@ export const Route = createFileRoute("/pedido_/confirmacion")({
   }),
   head: () => ({
     meta: [
-      { title: "Pedido confirmado — El Fogó de Massanassa" },
+      { title: "Pedido confirmado — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
-          "Confirmación de tu pedido en El Fogó de Massanassa: resumen de platos, total y datos de recogida.",
+          "Confirmación de tu pedido en RESTAURANTE CHICKEN GARDEN: resumen de platos, total y datos de recogida.",
       },
-      { property: "og:title", content: "Pedido confirmado — El Fogó de Massanassa" },
+      { property: "og:title", content: "Pedido confirmado — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content: "Tu pedido está confirmado y listo para recoger en el restaurante.",

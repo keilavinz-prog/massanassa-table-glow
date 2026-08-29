@@ -30,23 +30,23 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
   hours_label: "Horario",
   hours_prefix: "Martes a domingo",
   closed_note: "Lunes cerrado",
-  hero_title: "Cocina valenciana de mercado en Massanassa",
-  hero_image_alt: "Arroz valenciano recién hecho en paella",
+  hero_title: "Pollo asado y cocina internacional",
+  hero_image_alt: "Pollo asado con guarnición de ensalada",
   about_eyebrow: "Sobre nosotros",
-  about_title: "La taberna del barrio",
+  about_title: "El sabor de siempre",
   location_eyebrow: "Cómo llegar",
   location_title: "Dónde estamos",
   catering_eyebrow: "Catering y eventos",
-  catering_title: "Llevamos la paella a tu celebración",
+  catering_title: "Llevamos nuestro pollo asado a tu celebración",
   catering_body:
-    "Bodas, comuniones, cumpleaños y eventos de empresa con nuestros arroces en paella de leña y la cocina de siempre. Preparamos una propuesta a medida según fecha, número de invitados y presupuesto.",
+    "Bodas, comuniones, cumpleaños y eventos de empresa con nuestro pollo asado, ensaladas y tapas. Preparamos una propuesta a medida según fecha, número de invitados y presupuesto.",
   catering_cta_label: "¿Organizas un evento? Solicita presupuesto",
   menu_eyebrow: "Nuestra carta",
   menu_title: "Categorías",
   menu_cta_label: "Ver la carta digital",
-  seo_title: "El Fogó de Massanassa — Cocina valenciana de mercado",
+  seo_title: "RESTAURANTE CHICKEN GARDEN — Pollo asado y cocina internacional",
   seo_description:
-    "Taberna valenciana en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.",
+    "RESTAURANTE CHICKEN GARDEN: pollo asado, ensaladas, tapas, sartenes, menú del día y opciones para llevar.",
 };
 
 /** Mezcla lo guardado con los valores por defecto: nunca deja huecos en la landing. */

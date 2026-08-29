@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
-const STORAGE_KEY = "fogo-cookie-consent";
+const STORAGE_KEY = "chicken-garden-cookie-consent";
 
 /**
  * Banner de cookies informativo (RGPD/LSSI). No hay proveedor de analítica

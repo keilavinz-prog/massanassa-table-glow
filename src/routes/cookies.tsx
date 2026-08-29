@@ -7,13 +7,13 @@ export const Route = createFileRoute("/cookies")({
   },
   head: () => ({
     meta: [
-      { title: "Política de cookies — El Fogó de Massanassa" },
+      { title: "Política de cookies — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
           "Qué almacenamiento usamos en la web: cookies técnicas de sesión y almacenamiento local del carrito. Sin cookies publicitarias ni analítica.",
       },
-      { property: "og:title", content: "Política de cookies — El Fogó de Massanassa" },
+      { property: "og:title", content: "Política de cookies — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content: "Solo usamos almacenamiento técnico necesario. Sin analítica ni publicidad.",

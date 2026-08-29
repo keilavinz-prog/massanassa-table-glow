@@ -1,7 +1,7 @@
 /* Service worker mínimo: solo resiliencia offline de lectura para /carta.
  * Network-first; si la red falla en una navegación a /carta, sirve el HTML
  * guardado para que la carta cacheada siga visible en modo solo lectura. */
-const CACHE = "fogo-shell-v1";
+const CACHE = "chicken-garden-shell-v1";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
