@@ -1,4 +1,4 @@
-const MESSAGE = "Hola, quiero hacer una consulta sobre El Fogó de Massanassa 🍽️";
+const MESSAGE = "Hola, quiero hacer una consulta sobre Restaurante Chicken Garden 🍽️";
 
 export function WhatsAppFab({ phone }: { phone?: string | null | undefined }) {
   if (!phone) return null;

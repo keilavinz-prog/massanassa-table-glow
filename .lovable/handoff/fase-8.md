@@ -1,6 +1,6 @@
 # HANDOFF — Fase 8 de 9: Seguridad (RLS + hardening + GDPR)
 
-Fecha: 15 de agosto de 2026. Proyecto: El Fogó de Massanassa (Massanassa, Valencia).
+Fecha: 15 de agosto de 2026. Proyecto: Restaurante Chicken Garden (Massanassa, Valencia).
 
 ## 1. Ratificación retroactiva (Fase 7)
 
