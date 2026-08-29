@@ -1,6 +1,6 @@
 # Handoff — Fase 7: Dashboard tiempo real + Mapa + Catering/Proveedor
 
-**Proyecto:** El Fogó de Massanassa  
+**Proyecto:** Restaurante Chicken Garden  
 **Fecha:** 15 de agosto de 2026 (KEYVINZ)  
 **Fase:** 7 de 9  
 **Estado:** Completada y verificada en navegador.

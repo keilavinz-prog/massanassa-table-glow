@@ -24,13 +24,13 @@ export const Route = createFileRoute("/pedido")({
   loader: ({ context }) => context.queryClient.ensureQueryData(landingQuery),
   head: () => ({
     meta: [
-      { title: "Finalizar pedido — El Fogó de Massanassa" },
+      { title: "Finalizar pedido — Restaurante Chicken Garden" },
       {
         name: "description",
         content:
-          "Completa tu pedido para recoger en El Fogó de Massanassa: revisa los platos, deja tus datos y paga con tarjeta de forma segura.",
+          "Completa tu pedido para recoger en Restaurante Chicken Garden: revisa los platos, deja tus datos y paga con tarjeta de forma segura.",
       },
-      { property: "og:title", content: "Finalizar pedido — El Fogó de Massanassa" },
+      { property: "og:title", content: "Finalizar pedido — Restaurante Chicken Garden" },
       {
         property: "og:description",
         content: "Paga tu pedido para recogida en el restaurante con tarjeta.",

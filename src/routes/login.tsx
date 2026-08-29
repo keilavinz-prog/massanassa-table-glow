@@ -8,13 +8,13 @@ export const Route = createFileRoute("/login")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Acceso al equipo — El Fogó de Massanassa" },
+      { title: "Acceso al equipo — Restaurante Chicken Garden" },
       {
         name: "description",
         content:
-          "Área privada de El Fogó de Massanassa: acceso para gerencia, sala y proveedores.",
+          "Área privada de Restaurante Chicken Garden: acceso para gerencia, sala y proveedores.",
       },
-      { property: "og:title", content: "Acceso al equipo — El Fogó de Massanassa" },
+      { property: "og:title", content: "Acceso al equipo — Restaurante Chicken Garden" },
       {
         property: "og:description",
         content: "Inicia sesión para gestionar la carta, reservas y pedidos del restaurante.",
@@ -79,7 +79,7 @@ function LoginPage() {
           <span className="flex size-12 items-center justify-center rounded-full bg-primary text-primary-foreground">
             <UtensilsCrossed className="size-6" />
           </span>
-          <h1 className="mt-4 font-display text-h2">El Fogó de Massanassa</h1>
+          <h1 className="mt-4 font-display text-h2">Restaurante Chicken Garden</h1>
           <p className="text-small text-muted-foreground">Acceso al área privada</p>
         </div>
 

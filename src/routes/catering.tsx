@@ -28,13 +28,13 @@ export const Route = createFileRoute("/catering")({
   },
   head: () => ({
     meta: [
-      { title: "Catering y eventos — El Fogó de Massanassa" },
+      { title: "Catering y eventos — Restaurante Chicken Garden" },
       {
         name: "description",
         content:
           "Solicita presupuesto de catering para bodas, comuniones, cumpleaños y eventos de empresa en Massanassa.",
       },
-      { property: "og:title", content: "Catering y eventos — El Fogó de Massanassa" },
+      { property: "og:title", content: "Catering y eventos — Restaurante Chicken Garden" },
       {
         property: "og:description",
         content: "Arroces en paella de leña y cocina valenciana para tu celebración.",

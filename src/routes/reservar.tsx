@@ -51,13 +51,13 @@ export const Route = createFileRoute("/reservar")({
   notFoundComponent: () => <div className="p-8">Sin datos.</div>,
   head: () => ({
     meta: [
-      { title: "Reservar mesa — El Fogó de Massanassa" },
+      { title: "Reservar mesa — Restaurante Chicken Garden" },
       {
         name: "description",
         content:
-          "Reserva tu mesa en El Fogó de Massanassa: elige día, hora y comensales y te confirmamos en breve.",
+          "Reserva tu mesa en Restaurante Chicken Garden: elige día, hora y comensales y te confirmamos en breve.",
       },
-      { property: "og:title", content: "Reservar mesa — El Fogó de Massanassa" },
+      { property: "og:title", content: "Reservar mesa — Restaurante Chicken Garden" },
       {
         property: "og:description",
         content:
@@ -157,7 +157,7 @@ function ReservarPage() {
               <UtensilsCrossed className="size-5" />
             </span>
             <span className="font-display text-h3 font-semibold leading-none">
-              {landing.settings?.name ?? "El Fogó de Massanassa"}
+              {landing.settings?.name ?? "Restaurante Chicken Garden"}
             </span>
           </div>
           <Link

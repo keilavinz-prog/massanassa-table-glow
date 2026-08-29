@@ -4,12 +4,12 @@ import { ShieldAlert } from "lucide-react";
 export const Route = createFileRoute("/acceso-denegado")({
   head: () => ({
     meta: [
-      { title: "Acceso denegado — El Fogó de Massanassa" },
+      { title: "Acceso denegado — Restaurante Chicken Garden" },
       {
         name: "description",
         content: "No tienes permisos para ver esta sección del área privada.",
       },
-      { property: "og:title", content: "Acceso denegado — El Fogó de Massanassa" },
+      { property: "og:title", content: "Acceso denegado — Restaurante Chicken Garden" },
       {
         property: "og:description",
         content: "Tu cuenta no tiene permisos para esta sección del restaurante.",
