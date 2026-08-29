@@ -7,13 +7,13 @@ export const Route = createFileRoute("/aviso-legal")({
   },
   head: () => ({
     meta: [
-      { title: "Aviso legal — El Fogó de Massanassa" },
+      { title: "Aviso legal — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
           "Datos identificativos del restaurante, condiciones de uso de la web, pedidos para recogida y propiedad intelectual.",
       },
-      { property: "og:title", content: "Aviso legal — El Fogó de Massanassa" },
+      { property: "og:title", content: "Aviso legal — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content: "Información legal y condiciones de uso de la web del restaurante.",

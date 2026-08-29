@@ -7,7 +7,7 @@ export type CachedMenu = {
 
 type Envelope = { savedAt: number; data: CachedMenu };
 
-const KEY = "fogo-carta-cache-v1";
+const KEY = "chicken-garden-carta-cache-v1";
 /** La carta cacheada se considera utilizable 7 días (solo lectura, sin pedir). */
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
 

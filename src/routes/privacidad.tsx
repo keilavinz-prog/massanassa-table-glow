@@ -7,13 +7,13 @@ export const Route = createFileRoute("/privacidad")({
   },
   head: () => ({
     meta: [
-      { title: "Política de privacidad — El Fogó de Massanassa" },
+      { title: "Política de privacidad — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
           "Cómo tratamos tus datos personales en reservas, pedidos y solicitudes de catering: finalidad, base legal, conservación y derechos RGPD.",
       },
-      { property: "og:title", content: "Política de privacidad — El Fogó de Massanassa" },
+      { property: "og:title", content: "Política de privacidad — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content: "Información sobre el tratamiento de datos personales y tus derechos RGPD.",

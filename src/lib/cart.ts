@@ -7,8 +7,8 @@ export type CartItem = {
   quantity: number;
 };
 
-const STORAGE_KEY = "fogo-cart-v1";
-const EVENT = "fogo-cart-change";
+const STORAGE_KEY = "chicken-garden-cart-v1";
+const EVENT = "chicken-garden-cart-change";
 
 function isItem(value: unknown): value is CartItem {
   if (!value || typeof value !== "object") return false;

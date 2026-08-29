@@ -8,12 +8,12 @@ export const Route = createFileRoute("/proveedor")({
   beforeLoad: () => requireRole(["proveedor"]),
   head: () => ({
     meta: [
-      { title: "Panel de Proveedor — El Fogó de Massanassa" },
+      { title: "Panel de Proveedor — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content: "Área de proveedores: solicitudes de catering y eventos del restaurante.",
       },
-      { property: "og:title", content: "Panel de Proveedor — El Fogó de Massanassa" },
+      { property: "og:title", content: "Panel de Proveedor — RESTAURANTE CHICKEN GARDEN" },
       { property: "og:description", content: "Espacio privado para proveedores colaboradores." },
     ],
   }),

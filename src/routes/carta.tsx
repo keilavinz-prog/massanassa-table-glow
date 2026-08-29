@@ -24,13 +24,13 @@ export const Route = createFileRoute("/carta")({
   loader: ({ context }) => context.queryClient.ensureQueryData(menuQuery),
   head: () => ({
     meta: [
-      { title: "Carta digital — El Fogó de Massanassa" },
+      { title: "Carta digital — RESTAURANTE CHICKEN GARDEN" },
       {
         name: "description",
         content:
-          "Consulta la carta de El Fogó de Massanassa: arroces, pollo asado para llevar, menú del día, postres caseros y alérgenos de cada plato.",
+          "Consulta la carta de RESTAURANTE CHICKEN GARDEN: arroces, pollo asado para llevar, menú del día, postres caseros y alérgenos de cada plato.",
       },
-      { property: "og:title", content: "Carta digital — El Fogó de Massanassa" },
+      { property: "og:title", content: "Carta digital — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content:
