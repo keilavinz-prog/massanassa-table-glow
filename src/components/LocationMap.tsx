@@ -37,7 +37,7 @@ export function LocationMap({ settings }: { settings: MapSettings }) {
             <MapCanvas
               lat={lat}
               lng={lng}
-              name={settings?.name ?? "Restaurante Chicken Garden"}
+              name={settings?.name ?? "El Fogó de Massanassa"}
               addressLine={addressLine}
             />
           </Suspense>

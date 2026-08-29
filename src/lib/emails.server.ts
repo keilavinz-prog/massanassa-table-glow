@@ -9,7 +9,7 @@
  * email del titular de la cuenta de Resend.
  */
 
-const FROM = "Restaurante Chicken Garden <onboarding@resend.dev>";
+const FROM = "El Fogó de Massanassa <onboarding@resend.dev>";
 
 export type EmailResult = { sent: boolean; reason?: string };
 
@@ -57,7 +57,7 @@ function shell(title: string, body: string) {
   <div style="max-width:560px;margin:0 auto;padding:24px">
     <h1 style="font-size:24px;color:#C1440E;margin:0 0 16px">${escapeHtml(title)}</h1>
     ${body}
-    <p style="font-size:13px;color:#6B7A3A;margin-top:32px">Restaurante Chicken Garden</p>
+    <p style="font-size:13px;color:#6B7A3A;margin-top:32px">El Fogó de Massanassa</p>
   </div></body></html>`;
 }
 
@@ -90,7 +90,7 @@ export async function sendOrderConfirmationEmail(input: {
 
   return sendEmail(
     input.to,
-    "Tu pedido en Restaurante Chicken Garden está confirmado",
+    "Tu pedido en El Fogó de Massanassa está confirmado",
     shell("¡Pedido confirmado!", body),
   );
 }
@@ -115,7 +115,7 @@ export async function sendReservationConfirmationEmail(input: {
 
   return sendEmail(
     input.to,
-    "Tu reserva en Restaurante Chicken Garden está confirmada",
+    "Tu reserva en El Fogó de Massanassa está confirmada",
     shell("¡Reserva confirmada!", body),
   );
 }

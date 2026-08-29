@@ -116,7 +116,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON public.catering_requests TO anon, authen
 GRANT ALL ON public.catering_requests TO service_role;
 
 INSERT INTO public.restaurant_settings (id, name, slug, address, city, postal_code, phone, whatsapp_phone, email, lat, lng, opening_hours, description, hero_image_url, instagram_url, facebook_url)
-VALUES (1, 'Restaurante Chicken Garden', 'el-fogo-de-massanassa', 'Carrer Sant Josep, 14', 'Massanassa', '46469', '961 25 43 21', '34612345678', 'info@elfogodemassanassa.es', 39.4283, -0.3856,
+VALUES (1, 'El Fogó de Massanassa', 'el-fogo-de-massanassa', 'Carrer Sant Josep, 14', 'Massanassa', '46469', '961 25 43 21', '34612345678', 'info@elfogodemassanassa.es', 39.4283, -0.3856,
   '{"lun":"cerrado","mar_dom":"12:00–16:30 y 20:00–23:30"}'::jsonb,
   'Cocina tradicional valenciana con producto de mercado, arroces en paella de leña y el mejor pollo asado de Massanassa para llevar.',
   'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=1600&q=80',

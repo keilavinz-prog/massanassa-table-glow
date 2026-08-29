@@ -14,13 +14,13 @@ export const Route = createFileRoute("/admin")({
   beforeLoad: () => requireRole(["admin"]),
   head: () => ({
     meta: [
-      { title: "Panel de Administración — Restaurante Chicken Garden" },
+      { title: "Panel de Administración — El Fogó de Massanassa" },
       {
         name: "description",
         content: "Gestión interna del restaurante: carta, configuración y QR.",
       },
-      { property: "og:title", content: "Panel de Administración — Restaurante Chicken Garden" },
-      { property: "og:description", content: "Área de gerencia de Restaurante Chicken Garden." },
+      { property: "og:title", content: "Panel de Administración — El Fogó de Massanassa" },
+      { property: "og:description", content: "Área de gerencia de El Fogó de Massanassa." },
     ],
   }),
   component: AdminPage,
@@ -62,7 +62,7 @@ function AdminPage() {
       <ProtectedHeader user={user} />
       <main className="mx-auto max-w-6xl px-6 py-12">
         <h1 className="font-display text-h1">Panel de Administración</h1>
-        <p className="mt-2 text-muted-foreground">Restaurante Chicken Garden</p>
+        <p className="mt-2 text-muted-foreground">El Fogó de Massanassa</p>
 
         <nav className="mt-8 flex flex-wrap gap-2 border-b border-border/70 pb-3">
           {TABS.map((t) => (

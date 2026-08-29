@@ -22,7 +22,7 @@ SET landing_content = jsonb_build_object(
   'menu_eyebrow', 'Nuestra carta',
   'menu_title', 'Categorías',
   'menu_cta_label', 'Ver la carta digital',
-  'seo_title', 'Restaurante Chicken Garden — Cocina valenciana de mercado',
+  'seo_title', 'El Fogó de Massanassa — Cocina valenciana de mercado',
   'seo_description', 'Taberna valenciana en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.'
 )
 WHERE id = 1;

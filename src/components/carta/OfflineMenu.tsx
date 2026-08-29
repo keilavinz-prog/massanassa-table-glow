@@ -42,7 +42,7 @@ export function OfflineMenu({ message }: { message?: string }) {
               <UtensilsCrossed className="size-5" />
             </span>
             <span className="font-display text-h3 font-semibold leading-none">
-              {settings?.name ?? "Restaurante Chicken Garden"}
+              {settings?.name ?? "El Fogó de Massanassa"}
             </span>
           </div>
           <Link

@@ -44,9 +44,9 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
   menu_eyebrow: "Nuestra carta",
   menu_title: "Categorías",
   menu_cta_label: "Ver la carta digital",
-  seo_title: "Restaurante Chicken Garden — Cocina valenciana de mercado",
+  seo_title: "El Fogó de Massanassa — Cocina valenciana de mercado",
   seo_description:
-    "Restaurante Chicken Garden en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.",
+    "Taberna valenciana en Massanassa: arroces en paella de leña, pollo asado para llevar y cocina de mercado.",
 };
 
 /** Mezcla lo guardado con los valores por defecto: nunca deja huecos en la landing. */

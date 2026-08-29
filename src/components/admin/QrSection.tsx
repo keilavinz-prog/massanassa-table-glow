@@ -57,7 +57,7 @@ export function QrSection() {
     doc.setTextColor(59, 36, 23);
     doc.setFont("times", "bold");
     doc.setFontSize(22);
-    doc.text(settings?.name ?? "Restaurante Chicken Garden", w / 2, 28, { align: "center" });
+    doc.text(settings?.name ?? "El Fogó de Massanassa", w / 2, 28, { align: "center" });
 
     const qrSize = 78;
     doc.addImage(qrDataUrl, "PNG", (w - qrSize) / 2, 40, qrSize, qrSize);
@@ -74,7 +74,7 @@ export function QrSection() {
       .join(" · ");
     doc.text(footer || "Massanassa (Valencia)", w / 2, h - 18, { align: "center" });
 
-    doc.save("carta-qr-restaurante-chicken-garden.pdf");
+    doc.save("carta-qr-el-fogo-de-massanassa.pdf");
     toast.success("PDF descargado");
   }
 

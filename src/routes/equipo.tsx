@@ -10,12 +10,12 @@ export const Route = createFileRoute("/equipo")({
   beforeLoad: () => requireRole(["admin", "empleado"]),
   head: () => ({
     meta: [
-      { title: "Zona de Equipo — Restaurante Chicken Garden" },
+      { title: "Zona de Equipo — El Fogó de Massanassa" },
       {
         name: "description",
         content: "Vista operativa del equipo de sala: reservas y pedidos del día.",
       },
-      { property: "og:title", content: "Zona de Equipo — Restaurante Chicken Garden" },
+      { property: "og:title", content: "Zona de Equipo — El Fogó de Massanassa" },
       { property: "og:description", content: "Área de trabajo diario del equipo del restaurante." },
     ],
   }),
