@@ -11,7 +11,7 @@ export type SuggestInput = z.infer<typeof suggestInputSchema>;
 const MODEL = "claude-sonnet-4-5-20250929";
 
 function buildPrompt(data: SuggestInput) {
-  const category = data.category || "cocina tradicional valenciana";
+  const category = data.category || "cocina internacional";
   const allergens =
     data.allergens.length > 0
       ? ` Alérgenos declarados del plato: ${data.allergens.join(", ")}.`

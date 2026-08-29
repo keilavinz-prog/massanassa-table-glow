@@ -72,7 +72,7 @@ export function QrSection() {
     const footer = [settings?.address, settings?.city, settings?.phone]
       .filter(Boolean)
       .join(" · ");
-    doc.text(footer || "Massanassa (Valencia)", w / 2, h - 18, { align: "center" });
+    doc.text(footer || "RESTAURANTE CHICKEN GARDEN", w / 2, h - 18, { align: "center" });
 
     doc.save("carta-qr-restaurante-chicken-garden.pdf");
     toast.success("PDF descargado");

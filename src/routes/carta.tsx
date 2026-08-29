@@ -28,13 +28,13 @@ export const Route = createFileRoute("/carta")({
       {
         name: "description",
         content:
-          "Consulta la carta de RESTAURANTE CHICKEN GARDEN: arroces, pollo asado para llevar, menú del día, postres caseros y alérgenos de cada plato.",
+          "Consulta la carta de RESTAURANTE CHICKEN GARDEN: pollo asado, ensaladas, tapas, sartenes, menú del día y alérgenos de cada plato.",
       },
       { property: "og:title", content: "Carta digital — RESTAURANTE CHICKEN GARDEN" },
       {
         property: "og:description",
         content:
-          "Arroces, fideuà, pollo asado, menú del día y postres caseros con información de alérgenos.",
+          "Pollo asado, ensaladas, tapas, sartenes, menú del día y postres con información de alérgenos.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

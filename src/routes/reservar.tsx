@@ -61,7 +61,7 @@ export const Route = createFileRoute("/reservar")({
       {
         property: "og:description",
         content:
-          "Solicita tu mesa en nuestra taberna valenciana de Massanassa. Comidas y cenas, martes a domingo.",
+          "Solicita tu mesa en RESTAURANTE CHICKEN GARDEN. Comidas y cenas, martes a domingo.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
