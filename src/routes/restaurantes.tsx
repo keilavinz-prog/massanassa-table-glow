@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { getLandingData } from "@/lib/restaurant.functions";
+import { resolveHistoriaParagraphs } from "@/lib/site-content";
 import restaurantHero from "@/assets/restaurante-hero.jpg.asset.json";
 
 const landingQuery = queryOptions({
