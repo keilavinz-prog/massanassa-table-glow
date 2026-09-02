@@ -76,6 +76,8 @@ export const settingsInputSchema = z.object({
   hero_image_url: z.string().trim().max(2000).nullable().optional(),
   instagram_url: z.string().trim().max(300).nullable().optional(),
   facebook_url: z.string().trim().max(300).nullable().optional(),
+  nav_labels: z.record(z.string().trim().max(40)).default({}),
+  historia_texto: z.string().trim().max(4000).nullable().optional(),
 });
 
 export const uploadInputSchema = z.object({
