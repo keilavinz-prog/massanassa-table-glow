@@ -261,6 +261,7 @@ export type Database = {
           email: string | null
           facebook_url: string | null
           hero_image_url: string | null
+          historia_texto: string | null
           id: number
           instagram_url: string | null
           landing_content: Json
@@ -268,6 +269,7 @@ export type Database = {
           lng: number | null
           logo_url: string | null
           name: string
+          nav_labels: Json
           opening_hours: Json
           phone: string
           postal_code: string | null
@@ -283,6 +285,7 @@ export type Database = {
           email?: string | null
           facebook_url?: string | null
           hero_image_url?: string | null
+          historia_texto?: string | null
           id?: number
           instagram_url?: string | null
           landing_content?: Json
@@ -290,6 +293,7 @@ export type Database = {
           lng?: number | null
           logo_url?: string | null
           name: string
+          nav_labels?: Json
           opening_hours: Json
           phone: string
           postal_code?: string | null
@@ -305,6 +309,7 @@ export type Database = {
           email?: string | null
           facebook_url?: string | null
           hero_image_url?: string | null
+          historia_texto?: string | null
           id?: number
           instagram_url?: string | null
           landing_content?: Json
@@ -312,6 +317,7 @@ export type Database = {
           lng?: number | null
           logo_url?: string | null
           name?: string
+          nav_labels?: Json
           opening_hours?: Json
           phone?: string
           postal_code?: string | null
