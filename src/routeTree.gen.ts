@@ -22,6 +22,7 @@ import { Route as PedidoRouteImport } from './routes/pedido'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as ProveedorRouteImport } from './routes/proveedor'
 import { Route as ReservarRouteImport } from './routes/reservar'
+import { Route as RestaurantesRouteImport } from './routes/restaurantes'
 import { Route as PedidoConfirmacionRouteImport } from './routes/pedido_.confirmacion'
 import { Route as ApiPublicStripeWebhookRouteImport } from './routes/api/public/stripe-webhook'
 
@@ -90,6 +91,11 @@ const ReservarRoute = ReservarRouteImport.update({
   path: '/reservar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RestaurantesRoute = RestaurantesRouteImport.update({
+  id: '/restaurantes',
+  path: '/restaurantes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PedidoConfirmacionRoute = PedidoConfirmacionRouteImport.update({
   id: '/pedido_/confirmacion',
   path: '/pedido/confirmacion',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/restaurantes': typeof RestaurantesRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/restaurantes': typeof RestaurantesRoute
   '/pedido/confirmacion': typeof PedidoConfirmacionRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/privacidad': typeof PrivacidadRoute
   '/proveedor': typeof ProveedorRoute
   '/reservar': typeof ReservarRoute
+  '/restaurantes': typeof RestaurantesRoute
   '/pedido_/confirmacion': typeof PedidoConfirmacionRoute
   '/api/public/stripe-webhook': typeof ApiPublicStripeWebhookRoute
 }
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/proveedor'
     | '/reservar'
+    | '/restaurantes'
     | '/pedido/confirmacion'
     | '/api/public/stripe-webhook'
   fileRoutesByTo: FileRoutesByTo
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/proveedor'
     | '/reservar'
+    | '/restaurantes'
     | '/pedido/confirmacion'
     | '/api/public/stripe-webhook'
   id:
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/proveedor'
     | '/reservar'
+    | '/restaurantes'
     | '/pedido_/confirmacion'
     | '/api/public/stripe-webhook'
   fileRoutesById: FileRoutesById
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   PrivacidadRoute: typeof PrivacidadRoute
   ProveedorRoute: typeof ProveedorRoute
   ReservarRoute: typeof ReservarRoute
+  RestaurantesRoute: typeof RestaurantesRoute
   PedidoConfirmacionRoute: typeof PedidoConfirmacionRoute
   ApiPublicStripeWebhookRoute: typeof ApiPublicStripeWebhookRoute
 }
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/restaurantes': {
+      id: '/restaurantes'
+      path: '/restaurantes'
+      fullPath: '/restaurantes'
+      preLoaderRoute: typeof RestaurantesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pedido_/confirmacion': {
       id: '/pedido_/confirmacion'
       path: '/pedido/confirmacion'
@@ -349,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacidadRoute: PrivacidadRoute,
   ProveedorRoute: ProveedorRoute,
   ReservarRoute: ReservarRoute,
+  RestaurantesRoute: RestaurantesRoute,
   PedidoConfirmacionRoute: PedidoConfirmacionRoute,
   ApiPublicStripeWebhookRoute: ApiPublicStripeWebhookRoute,
 }
