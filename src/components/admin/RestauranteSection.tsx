@@ -5,6 +5,20 @@ import { toast } from "sonner";
 import { Plus, Trash2 } from "lucide-react";
 import { getAdminSettings, saveSettings } from "@/lib/admin.functions";
 import { ImageField } from "./ImageField";
+import {
+  DEFAULT_HISTORIA_TEXTO,
+  NAV_KEYS,
+  resolveNavLabels,
+  type NavKey,
+} from "@/lib/site-content";
+
+const NAV_FIELD_LABELS: Record<NavKey, string> = {
+  inicio: "Pestaña Inicio",
+  carta: "Pestaña Carta",
+  restaurantes: "Pestaña Restaurantes",
+  reservar: "Pestaña Reservar",
+  catering: "Pestaña Catering",
+};
 
 const inputClass =
   "w-full rounded-sm border border-input bg-background px-3 py-2 text-body outline-none focus:border-terracota";
@@ -26,6 +40,8 @@ type Form = {
   hero_image_url: string | null;
   instagram_url: string;
   facebook_url: string;
+  nav_labels: Record<NavKey, string>;
+  historia_texto: string;
 };
 
 export function RestauranteSection() {
@@ -56,6 +72,8 @@ export function RestauranteSection() {
       hero_image_url: data.hero_image_url,
       instagram_url: data.instagram_url ?? "",
       facebook_url: data.facebook_url ?? "",
+      nav_labels: resolveNavLabels(data.nav_labels),
+      historia_texto: data.historia_texto ?? "",
     });
     const raw = (data.opening_hours ?? {}) as Record<string, unknown>;
     setHours(Object.entries(raw).map(([k, v]) => [k, String(v)]));
@@ -109,6 +127,8 @@ export function RestauranteSection() {
             hero_image_url: form.hero_image_url,
             instagram_url: form.instagram_url,
             facebook_url: form.facebook_url,
+            nav_labels: form.nav_labels,
+            historia_texto: form.historia_texto,
           },
         });
       }}
@@ -268,6 +288,46 @@ export function RestauranteSection() {
           label="Imagen hero"
           value={form.hero_image_url}
           onChange={(url) => set({ hero_image_url: url })}
+        />
+      </div>
+
+      <div className="space-y-4 rounded-md bg-card p-5 shadow-warm">
+        <div>
+          <h3 className="font-display text-h3">Navegación del menú</h3>
+          <p className="text-small text-muted-foreground">
+            Cambia solo el texto visible de cada pestaña; los enlaces no cambian.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {NAV_KEYS.map((key) => (
+            <label key={key} className="block space-y-1">
+              <span className="text-small font-medium">{NAV_FIELD_LABELS[key]}</span>
+              <input
+                className={inputClass}
+                value={form.nav_labels[key]}
+                onChange={(e) =>
+                  set({ nav_labels: { ...form.nav_labels, [key]: e.target.value } })
+                }
+              />
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-3 rounded-md bg-card p-5 shadow-warm">
+        <div>
+          <h3 className="font-display text-h3">Nuestra historia (página Restaurantes)</h3>
+          <p className="text-small text-muted-foreground">
+            Separa los párrafos con una línea en blanco. Si lo dejas vacío se mostrará el
+            texto por defecto.
+          </p>
+        </div>
+        <textarea
+          className={inputClass}
+          rows={10}
+          placeholder={DEFAULT_HISTORIA_TEXTO}
+          value={form.historia_texto}
+          onChange={(e) => set({ historia_texto: e.target.value })}
         />
       </div>
 
