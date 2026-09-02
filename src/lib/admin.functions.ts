@@ -174,6 +174,8 @@ export const saveSettings = createServerFn({ method: "POST" })
         hero_image_url: data.hero_image_url || null,
         instagram_url: data.instagram_url || null,
         facebook_url: data.facebook_url || null,
+        nav_labels: data.nav_labels,
+        historia_texto: data.historia_texto || null,
         updated_at: new Date().toISOString(),
       })
       .eq("id", 1);

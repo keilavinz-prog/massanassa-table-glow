@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { BrandLogo } from "./BrandLogo";
 import type { RestaurantSettings } from "@/lib/restaurant.functions";
+import { resolveNavLabels } from "@/lib/site-content";
 
 const NAV = [
-  { to: "/", label: "Inicio" },
-  { to: "/carta", label: "Carta" },
-  { to: "/restaurantes", label: "Restaurantes" },
-  { to: "/reservar", label: "Reservar" },
-  { to: "/catering", label: "Catering" },
+  { to: "/", key: "inicio" },
+  { to: "/carta", key: "carta" },
+  { to: "/restaurantes", key: "restaurantes" },
+  { to: "/reservar", key: "reservar" },
+  { to: "/catering", key: "catering" },
 ] as const;
 
 export function SiteHeader({
@@ -17,6 +18,7 @@ export function SiteHeader({
   settings: RestaurantSettings | null;
   ctaLabel?: string;
 }) {
+  const labels = resolveNavLabels(settings?.nav_labels);
   return (
     <header className="sticky top-0 z-20 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-4">
@@ -46,7 +48,7 @@ export function SiteHeader({
               activeOptions={{ exact: true }}
               className="transition-warm rounded-md px-3 py-2 text-small font-medium"
             >
-              {item.label}
+              {labels[item.key]}
             </Link>
           ))}
         </nav>
