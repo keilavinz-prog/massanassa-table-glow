@@ -48,7 +48,7 @@ export function SiteHeader({
               activeOptions={{ exact: true }}
               className="transition-warm rounded-md px-3 py-2 text-small font-medium"
             >
-              {item.label}
+              {labels[item.key]}
             </Link>
           ))}
         </nav>
