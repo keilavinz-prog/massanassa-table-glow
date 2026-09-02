@@ -67,6 +67,9 @@ export function SiteFooter({ settings: s }: { settings: FooterSettings }) {
       </div>
       <div className="border-t border-cream/15">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-5 gap-y-2 px-6 py-5 text-small text-cream/60">
+          <Link to="/restaurantes" className="transition-warm hover:text-gold">
+            Restaurantes
+          </Link>
           <Link to="/aviso-legal" className="transition-warm hover:text-gold">
             Aviso legal
           </Link>
