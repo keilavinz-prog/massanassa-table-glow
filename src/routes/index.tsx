@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { MapPin, Phone } from "lucide-react";
-import { BrandLogo } from "@/components/BrandLogo";
+import { SiteHeader } from "@/components/SiteHeader";
 import { getLandingData } from "@/lib/restaurant.functions";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
@@ -50,31 +50,7 @@ function Landing() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-20 border-b border-border/70 bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-4">
-          <div className="flex items-center gap-3">
-            <BrandLogo />
-            <span className="font-display text-h3 font-semibold leading-none">
-              {s?.name}
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link
-              to="/reservar"
-              className="transition-warm inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-medium text-primary-foreground shadow-warm hover:brightness-110"
-            >
-              {c.header_cta_label}
-            </Link>
-          <div className="text-right text-small text-muted-foreground">
-            <p className="eyebrow text-accent-foreground/70">{c.hours_label}</p>
-            <p>
-              {c.hours_prefix} · {hoursSummary}
-            </p>
-            <p>{c.closed_note}</p>
-          </div>
-          </div>
-        </div>
-      </header>
+      <SiteHeader settings={s} ctaLabel={c.header_cta_label} />
 
       <main>
         <section className="relative overflow-hidden">
