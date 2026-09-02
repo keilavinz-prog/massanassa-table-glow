@@ -111,21 +111,9 @@ function RestaurantesPage() {
           </h2>
 
           <div className="mt-6 space-y-5 text-body leading-relaxed text-muted-foreground">
-            <p>
-              Chicken Garden nació cerca de la estación de Cercanías de
-              Massanassa, con una idea sencilla: combinar la tradición del pollo
-              asado y la parrilla con influencias europeas y asiáticas en la
-              preparación de carnes. Esa mezcla marcó desde el principio la
-              identidad del local.
-            </p>
-            <p>
-              Hoy, Chicken Garden es punto de referencia en Massanassa para
-              quienes buscan pollo rotisserie, churrasco y parrilladas mixtas
-              con raciones generosas, acompañadas de postres caseros. Su terraza
-              cubierta, sus salas climatizadas y su amplio parking lo convierten
-              en una opción habitual para familias y grupos, con servicio para
-              llevar y organización de eventos privados.
-            </p>
+            {resolveHistoriaParagraphs(s?.historia_texto).map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
           </div>
 
           {/* Badges */}
